@@ -10,4 +10,6 @@ public class BiuropodrozyApplication {
         SpringApplication.run(BiuropodrozyApplication.class, args);
     }
 
+
+
 }
