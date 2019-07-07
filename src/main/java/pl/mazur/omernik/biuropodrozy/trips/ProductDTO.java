@@ -13,7 +13,7 @@ public class ProductDTO {
 
     private Long id;
     private String tripDestination;
-    private Long continenIdt;
+    private Long continenId;
     private Long countryId;
     private Long airportId;
     private Long hotelId;
