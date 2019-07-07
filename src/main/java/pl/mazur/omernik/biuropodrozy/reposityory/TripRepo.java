@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.api;
+package pl.mazur.omernik.biuropodrozy.reposityory;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

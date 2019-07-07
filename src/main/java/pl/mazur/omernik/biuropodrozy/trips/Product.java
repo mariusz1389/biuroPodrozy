@@ -5,32 +5,37 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.mazur.omernik.biuropodrozy.BaseEntity;
+import pl.mazur.omernik.biuropodrozy.entity.Airport;
+import pl.mazur.omernik.biuropodrozy.entity.Continent;
+import pl.mazur.omernik.biuropodrozy.entity.Country;
+import pl.mazur.omernik.biuropodrozy.entity.Hotel;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import java.time.LocalDate;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Locale;
-
-@Setter
 @Getter
+@Setter
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "system_type",
-        discriminatorType = DiscriminatorType.STRING)
+
 public class Product extends BaseEntity {
-    private Integer stockAmount;
-    @ManyToOne
-    private Author author;
-    private String countryOfPublishing;
-    private String title;
-    private String description;
-    private String pictureURL;
-    private BigDecimal price;
-    @Enumerated(EnumType.STRING)
-    private ProductType productType;
-    @ManyToOne
-    private Locale.Category category;
+
+    private String tripDestination;
+    private Continent continent;
+    private Country country;
+    private Airport airport;
+    private Hotel hotel;
+    private LocalDate timeOfDeparture;
+    private LocalDate timeOfArrival;
+    private int numberOfDays;
+
+
+
+
+
 }

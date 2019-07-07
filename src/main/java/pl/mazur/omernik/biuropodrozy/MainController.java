@@ -6,7 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.mazur.omernik.biuropodrozy.api.TripRepo;
+import pl.mazur.omernik.biuropodrozy.reposityory.TripRepo;
 import pl.mazur.omernik.biuropodrozy.entity.*;
 
 import java.time.LocalDate;
@@ -43,48 +43,5 @@ public class MainController {
         }
     }
 
-    private TripRepo tripRepo;
 
-    @Autowired
-    public MainController(TripRepo tripRepo) {
-        this.tripRepo = tripRepo;
-    }
-
-    @GetMapping
-    public Iterable<Trip> getTrips() {
-        return tripRepo.findAll();
-    }
-
-    @PostMapping
-    public void addTrip(@RequestBody Trip trip) {
-        tripRepo.save(trip);
-    }
-
-    @DeleteMapping
-    public void removeTrip(@RequestParam Long id) {
-        tripRepo.deleteById(id);
-    }
-
-    @PutMapping
-    public void putTrip(@RequestBody Trip trip) {
-        Optional<Trip> element = tripRepo.findById(trip.getId());
-        if (element.isPresent()) {
-            tripRepo.save(trip);
-        }
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void get() {
-
-        Trip trip1 = new Trip(new City("Londyn")
-                , new Airport("Chopina")
-                , new Hotel("Hilton", 5)
-                , LocalDate.of(2019, 01, 01)
-                , LocalDate.of(2019, 01, 02)
-                , 2);
-
-
-        tripRepo.save(trip1);
-
-    }
 }

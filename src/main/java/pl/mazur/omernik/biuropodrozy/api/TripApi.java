@@ -1,56 +1,63 @@
 package pl.mazur.omernik.biuropodrozy.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
+import pl.mazur.omernik.biuropodrozy.entity.Airport;
+import pl.mazur.omernik.biuropodrozy.entity.City;
+import pl.mazur.omernik.biuropodrozy.entity.Hotel;
+import pl.mazur.omernik.biuropodrozy.entity.Trip;
+import pl.mazur.omernik.biuropodrozy.reposityory.TripRepo;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 @RestController
 public class TripApi {
 
-//    private TripRepo tripRepo;
-//
-//    @Autowired
-//    public TripApi(TripRepo tripRepo) {
-//        this.tripRepo = tripRepo;
-//    }
-//
-//    @GetMapping
-//    public Iterable<Trip> getCoffes() {
-//        return tripRepo.findAll();
-//    }
-//
-//    @PostMapping
-//    public void addCoffee(@RequestBody Trip coffee)
-//    {
-//        tripRepo.save(coffee);
-//    }
-//
-//    @DeleteMapping
-//    public void removeCoffe(@RequestParam Long id) {
-//        tripRepo.deleteById(id);
-//    }
-//
-//    @PutMapping
-//    public void putCoffee(@RequestBody Trip coffee)
-//    {
-//        Optional<Trip> element = tripRepo.findById(coffee.getId());
-//        if(element.isPresent())
-//        {
-//            tripRepo.save(coffee);
-//        }
-//    }
-//
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void get() {
-//
-//        Trip trip1 = new Trip("Londyn", "London Airport", "Continental", "23.07.2019",
-//                "30.07.2019", 7);
-//        Trip trip2 = new Trip("Warszawa", "Chopina", "Hilton", "23.07.2019",
-//                "30.07.2019", 7);
-//        Trip trip3 = new Trip("Libona", "Lizbona Airport", "Premium", "23.07.2019",
-//                "30.07.2019", 7);
-//
-//        tripRepo.save(trip1);
-//        tripRepo.save(trip2);
-//        tripRepo.save(trip3);
-//    }
+    private TripRepo tripRepo;
 
+    @Autowired
+    public TripApi(TripRepo tripRepo) {
+        this.tripRepo = tripRepo;
+    }
+
+    @GetMapping
+    public Iterable<Trip> getTrips() {
+        return tripRepo.findAll();
+    }
+
+    @PostMapping
+    public void addTrip(@RequestBody Trip trip) {
+        tripRepo.save(trip);
+    }
+
+    @DeleteMapping
+    public void removeTrip(@RequestParam Long id) {
+        tripRepo.deleteById(id);
+    }
+
+    @PutMapping
+    public void putTrip(@RequestBody Trip trip) {
+        Optional<Trip> element = tripRepo.findById(trip.getId());
+        if (element.isPresent()) {
+            tripRepo.save(trip);
+        }
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void get() {
+
+        Trip trip1 = new Trip(new City("Londyn")
+                , new Airport("Chopina")
+                , new Hotel("Hilton", 5)
+                , LocalDate.of(2019, 01, 01)
+                , LocalDate.of(2019, 01, 02)
+                , 2);
+
+
+        tripRepo.save(trip1);
+
+    }
 }
