@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
       xmlns:th="http://www.thymeleaf.org"
-      lang="pl" xmlns:th="http://www.thymeleaf.org">
+      >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +9,7 @@
 
     <title>Pierwsza strona</title>
 
-    <link th:href ="@{css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href ="@{css/style.css}" rel="stylesheet">
+
 
 </head>
 <body>
@@ -20,41 +19,6 @@
 
     <div class="row">
 
-        <div class="col-md-8">
-            <span th:text="${someText}" class="badge badge-info">Label</span>
-
-            <span class="badge badge-info">Sprawdzenie, czy podany text jest pusty</span>
-
-            <div th:if="${#strings.isEmpty(someText)}">
-
-                <div>Text jest pusty</div>
-
-            </div>
-
-
-            <div th:unless="${#strings.isEmpty(someText)}">
-
-                <div th:text=" 'Wprowadzony test,' + ${someText}"></div>
-
-            </div>
-
-            <span class="badge badge-info">Wypisanie długości textu</span>
-
-
-            <div th:text=" ${#strings.length(someText)} ">Text jest pusty</div>
-
-            <span class="badge badge-info">Sprawdzenie, czy tekst jest taki sam dwie takie same zmienne</span>
-
-
-            <div th:text="${#strings.equals(someText,someText)} ">Text jest pusty</div>
-
-            <span class="badge badge-info">Sprawdzenie, czy tekst jest taki sam jedna zmienna to odpowiedź, druga statyczna</span>
-
-
-            <div th:text="${#strings.equals(someText,'tekst')} ">Text jest pusty</div>
-
-
-            <h1>Pętla w thymeleaf</h1>
 
 
             <h1>Wycieczka</h1>

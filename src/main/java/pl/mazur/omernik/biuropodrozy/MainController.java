@@ -12,7 +12,7 @@ import java.util.Set;
 public class MainController {
 
     Set<Trip> trip = new HashSet<>();
-    String someText = "Nowa Wycieczka!";
+    public String someText = "Nowa Wycieczka!";
 
     @GetMapping("/trip")
     public ModelAndView getMain() {
@@ -20,7 +20,7 @@ public class MainController {
         m.setViewName("index");
         m.addObject("someText", someText);
         initTrip();
-        m.addObject("trip", trip);
+        m.addObject("trips", trip);
         return m;
     }
 
