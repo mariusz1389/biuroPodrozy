@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @Entity
 public class Addres extends BaseEntity {
 
-    Country country;
+//    Country country;
     String streat;
     String zipCode;
     String houseNumber;
