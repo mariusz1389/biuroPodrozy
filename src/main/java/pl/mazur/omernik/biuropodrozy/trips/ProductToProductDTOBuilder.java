@@ -31,10 +31,10 @@ public class ProductToProductDTOBuilder {
         return ProductDTO.builder()
                 .id(product.getId())
                 .tripDestination(product.getTripDestination())
-                .continenId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
-                .countryId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
-                .airportId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
-                .hotelId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
+//                .continenId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
+//                .countryId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
+//                .airportId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
+//                .hotelId(Optional.ofNullable(product.getContinent()).map(e -> e.getId()).orElse(null))
                 .timeOfDeparture(product.getTimeOfDeparture())
                 .timeOfArrival(product.getTimeOfArrival())
                 .numberOfDays(product.getNumberOfDays())
@@ -50,14 +50,14 @@ public class ProductToProductDTOBuilder {
         }
 
         product.setTripDestination(dto.getTripDestination());
-        product.setContinent(Optional.ofNullable(dto.getContinenId())
-                .map(continentRepository::getOne).orElse(null));
-        product.setCountry(Optional.ofNullable(dto.getCountryId())
-                .map(countryRepository::getOne).orElse(null));
-        product.setAirport(Optional.ofNullable(dto.getAirportId())
-                .map(airportRepository::getOne).orElse(null));
-        product.setHotel(Optional.ofNullable(dto.getHotelId())
-                .map(hotelRepository::getOne).orElse(null));
+//        product.setContinent(Optional.ofNullable(dto.getContinenId())
+//                .map(continentRepository::getOne).orElse(null));
+//        product.setCountry(Optional.ofNullable(dto.getCountryId())
+//                .map(countryRepository::getOne).orElse(null));
+//        product.setAirport(Optional.ofNullable(dto.getAirportId())
+//                .map(airportRepository::getOne).orElse(null));
+//        product.setHotel(Optional.ofNullable(dto.getHotelId())
+//                .map(hotelRepository::getOne).orElse(null));
         product.setTimeOfDeparture(dto.getTimeOfDeparture());
         product.setTimeOfArrival(dto.getTimeOfArrival());
         product.setNumberOfDays(dto.getNumberOfDays());

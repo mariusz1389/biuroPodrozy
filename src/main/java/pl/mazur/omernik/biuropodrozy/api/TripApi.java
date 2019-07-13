@@ -49,9 +49,7 @@ public class TripApi {
     @EventListener(ApplicationReadyEvent.class)
     public void get() {
 
-        Trip trip1 = new Trip(new City("Londyn")
-                , new Airport("Chopina")
-                , new Hotel("Hilton", 5)
+        Trip trip1 = new Trip("Berlin", "Tegel", "HotelRobotniczy"
                 , LocalDate.of(2019, 01, 01)
                 , LocalDate.of(2019, 01, 02)
                 , 2);

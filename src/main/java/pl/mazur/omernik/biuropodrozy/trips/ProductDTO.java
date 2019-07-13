@@ -15,7 +15,7 @@ public class ProductDTO {
     private String tripDestination;
     private Long continenId;
     private Long countryId;
-    private Long airportId;
+//    private Long airportId;
     private Long hotelId;
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;

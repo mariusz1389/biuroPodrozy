@@ -17,9 +17,9 @@ import java.time.LocalDate;
 @Entity
 public class Trip extends BaseEntity {
 
-    private City city;
-    private Airport airport;
-    private Hotel hotel;
+    private String city;
+    private String airport;
+    private String hotel;
     private LocalDate dateDeparture;
     private LocalDate dateArrival;
     private int numberOfDays;
@@ -29,7 +29,7 @@ public class Trip extends BaseEntity {
     }
 
 
-    public void destinationFrom(String szczecin, String goleniow_nie_w_szc) {
+    public void destinationFrom(String city, String airport) {
     }
 
 

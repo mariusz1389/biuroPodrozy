@@ -5,11 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.mazur.omernik.biuropodrozy.BaseEntity;
-import pl.mazur.omernik.biuropodrozy.entity.Airport;
-import pl.mazur.omernik.biuropodrozy.entity.Continent;
-import pl.mazur.omernik.biuropodrozy.entity.Country;
-import pl.mazur.omernik.biuropodrozy.entity.Hotel;
-
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -26,10 +21,10 @@ import java.time.LocalDate;
 public class Product extends BaseEntity {
 
     private String tripDestination;
-    private Continent continent;
-    private Country country;
-    private Airport airport;
-    private Hotel hotel;
+    private String continent;
+    private String country;
+    private String airport;
+    private String hotel;
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;
     private int numberOfDays;

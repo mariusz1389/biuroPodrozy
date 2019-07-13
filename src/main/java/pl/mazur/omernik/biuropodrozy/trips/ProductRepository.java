@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface ProductRepository<T extends Product> extends JpaRepository<Product, Long>, QuerydslPredicateExecutor<Product> {
 
-    Optional<T> findProductById(Long id);
+   // Optional<T> findProductById(Long id);
 
 //    List<T> findProductsByProductType(ProductType productType);
 
-    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
-    List<T> findProductsByTittleLike(String searchText);
+//    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
+//    List<T> findProductsByTittleLike(String searchText);
 
 //    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%') and p.productType = ?2")
 //    List<T> findByTitleAndProductType(String searchText, ProductType productType);
