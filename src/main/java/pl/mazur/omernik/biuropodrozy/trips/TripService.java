@@ -18,8 +18,8 @@ public class TripService {
     private TripsToProductDTOBuilder tripsToProductDTOBuilder;
 
     public void createNewProduct(String tripDestination, String continent, String country
-                               , String airport, String hotel, LocalDate timeOfDeparture
-                               , LocalDate timeOfArrival, int numberOfDays) {
+            , String airport, String hotel, LocalDate timeOfDeparture
+            , LocalDate timeOfArrival, int numberOfDays) {
         Trips trips = new Trips();
         trips.setTripDestination(tripDestination);
         trips.setContinent(continent);
@@ -33,18 +33,24 @@ public class TripService {
         tripsRepository.save(trips);
     }
 
-    public void updateTrips(TripsDTO productDTO){
+    public void updateTrips(TripsDTO productDTO) {
         Trips s = tripsToProductDTOBuilder.buildEntity(productDTO);
         tripsRepository.save(s);
     }
 
-    public Optional<Trips> findProducts(Long id){
+    public Optional<Trips> findProducts(Long id) {
         return tripsRepository.findProductById(id);
     }
 
     public List<Trips> findTripsToEdit(String query, String destination) {
-        return findTripsToEdit(query,destination);
+        return findTripsToEdit(query, destination);
     }
+
+
+    public List<Trips> findAllTrips(){
+        return tripsRepository.findAll();
+    }
+
 
     @PostConstruct
     private void mockTrips() {
@@ -54,5 +60,7 @@ public class TripService {
                 , LocalDate.of(2019, 06, 04)
                 , 5);
     }
+
+
 
 }

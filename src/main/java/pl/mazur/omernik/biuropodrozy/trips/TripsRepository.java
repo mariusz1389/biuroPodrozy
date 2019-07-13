@@ -15,10 +15,10 @@ public interface TripsRepository<T extends Trips> extends JpaRepository<Trips, L
 
     List<T> findTripsByTripDestination(Trips destination);
 
-    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
-    List<T> findTripsByTripTitleLike(String title);
-
-    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%') and p.productType = ?2")
-    List<T> findByTitleAndDestionation(String searchText, Trip destination);
+//    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
+//    List<T> findTripsByTripTitleLike(String title);
+//
+//    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%') and p.productType = ?2")
+//    List<T> findByTitleAndDestionation(String searchText, Trip destination);
 
 }
