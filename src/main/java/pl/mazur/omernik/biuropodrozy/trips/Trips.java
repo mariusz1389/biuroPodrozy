@@ -2,7 +2,6 @@ package pl.mazur.omernik.biuropodrozy.trips;
 
 import lombok.*;
 import pl.mazur.omernik.biuropodrozy.BaseEntity;
-import pl.mazur.omernik.biuropodrozy.entity.Trip;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
