@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mazur.omernik.biuropodrozy.entity.Trip;
+import pl.mazur.omernik.biuropodrozy.trips.Trips;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,7 +14,8 @@ import java.util.Set;
 public class MainController {
 
 
-    Set<Trip> trip = new HashSet<>();
+
+    Set<Trips> trip = new HashSet<>();
     public String someText = "Nowa Wycieczka!";
 
     @GetMapping("/trip")
@@ -28,8 +30,6 @@ public class MainController {
 
     public void initTrip() {
         for (int i = 0; i <= 10; i++) {
-            trip.add( new Trip("Londyn1", "Chopina1","Hilton1",LocalDate.of(2019, 01, 01)
-                            , LocalDate.of(2019, 01, 02),5));
 
         }
     }

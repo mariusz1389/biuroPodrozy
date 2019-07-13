@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO {
+@ToString
+public class TripsDTO {
 
     private Long id;
     private String tripDestination;
