@@ -29,8 +29,4 @@ public class Product extends BaseEntity {
     private LocalDate timeOfArrival;
     private int numberOfDays;
 
-
-
-
-
 }

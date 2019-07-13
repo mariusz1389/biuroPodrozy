@@ -25,13 +25,8 @@ public class Trip extends BaseEntity {
     private int numberOfDays;
 
 
-    public void dstinationTo(String city, String airport, String hotel) {
+    public void destinationTo(String city, String airport, String hotel) {
     }
-
-
-    public void destinationFrom(String city, String airport) {
-    }
-
 
 }
 
