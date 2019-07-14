@@ -59,8 +59,6 @@ public class TripService {
 //            throw new TripExistsException("Trip with destination " + trip.getTripDestination() + "already exists in database");
 //        } else {
             tripRepository.save(trip);
-
-
     }
 
     @PostConstruct

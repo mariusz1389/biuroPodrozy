@@ -39,16 +39,16 @@ public class MainController {
     @GetMapping(value = "/addTrip")
     public String administrateTrips(Model model) {
         model.addAttribute("addNewTrip", new AddTripDTO());
-        return "Admin";
+        return "tripAdmin";
     }
 
     @PostMapping(value = "/addTrip")
     public String addTripEffect(@ModelAttribute(name = "addNewTrip")
                                     @Valid AddTripDTO addNewTripDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "Admin";
+            return "tripAdmin";
         }
-        tripService.addNewTrips(addNewTripDTO);
+//        tripService.addNewTrips(addNewTripDTO);
         return "addTripEffect";
     }
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
@@ -21,12 +22,12 @@ public class AddTripDTO {
     private String airport;
     @NotBlank(message = "Pole musi zostać wypełnione")
     private String hotel;
-    @Pattern(regexp = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|3[0-1])$", message = "Zły format. Data wylotu powinna być podana w formacie RRRR-MM-DD")
+    @NotNull(message = "Pole musi zostać wypełnione")
     private LocalDate timeOfDeparture;
-    @Pattern(regexp = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|3[0-1])$", message = "Zły format. Data przylotu powinna być podana w formacie RRRR-MM-DD")
+    @NotNull(message = "Pole musi zostać wypełnione")
     private LocalDate timeOfArrival;
-    @NotBlank(message = "Pole musi zostać wypełnione")
+    @NotNull(message = "Pole musi zostać wypełnione")
     private Integer numberOfDays;
-    @NotBlank(message = "Pole musi zostać wypełnione")
+    @NotNull(message = "Pole musi zostać wypełnione")
     private Integer price;
 }
