@@ -34,14 +34,14 @@
                 </tr>
 
 
-                <tr th:each="trips,iterationStatus : ${trips}">
+                <tr th:each="trip,iterationStatus : ${trips}">
 
                     <td th:text="${iterationStatus.count}">1</td>
-                    <td th:text="${trips.tripDestination}">Name</td>
-                    <td th:text="${trips.hotel}">Hotel</td>
-                    <td th:text="${trips.timeOfDeparture}">Departure</td>
-                    <td th:text="${trips.timeOfArrival}">Arrival</td>
-                    <td th:text="${trips.numberOfDays}">Length</td>
+                    <td th:text="${trip.tripDestination}">Name</td>
+                    <td th:text="${trip.hotel}">Hotel</td>
+                    <td th:text="${trip.timeOfDeparture}">Departure</td>
+                    <td th:text="${trip.timeOfArrival}">Arrival</td>
+                    <td th:text="${trip.numberOfDays}">Length</td>
 
 
 

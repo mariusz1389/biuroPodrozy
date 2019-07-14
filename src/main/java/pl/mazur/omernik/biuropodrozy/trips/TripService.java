@@ -11,46 +11,57 @@ import java.util.Optional;
 @Service
 public class TripService {
 
-    @Autowired
-    private TripsRepository<Trips> tripsRepository;
+
 
     @Autowired
-    private TripsToProductDTOBuilder tripsToProductDTOBuilder;
+    private TripRepository<Trip> tripRepository;
+
+    @Autowired
+    private TripToProductDTOBuilder tripToProductDTOBuilder;
 
     public void createNewProduct(String tripDestination, String continent, String country
             , String airport, String hotel, LocalDate timeOfDeparture
             , LocalDate timeOfArrival, int numberOfDays) {
-        Trips trips = new Trips();
-        trips.setTripDestination(tripDestination);
-        trips.setContinent(continent);
-        trips.setCountry(country);
-        trips.setAirport(airport);
-        trips.setHotel(hotel);
-        trips.setTimeOfDeparture(timeOfDeparture);
-        trips.setTimeOfArrival(timeOfArrival);
-        trips.setNumberOfDays(numberOfDays);
+        Trip trip = new Trip();
+        trip.setTripDestination(tripDestination);
+        trip.setContinent(continent);
+        trip.setCountry(country);
+        trip.setAirport(airport);
+        trip.setHotel(hotel);
+        trip.setTimeOfDeparture(timeOfDeparture);
+        trip.setTimeOfArrival(timeOfArrival);
+        trip.setNumberOfDays(numberOfDays);
 
-        tripsRepository.save(trips);
+        tripRepository.save(trip);
     }
 
-    public void updateTrips(TripsDTO productDTO) {
-        Trips s = tripsToProductDTOBuilder.buildEntity(productDTO);
-        tripsRepository.save(s);
+    public void updateTrips(TripDTO productDTO) {
+        Trip s = tripToProductDTOBuilder.buildEntity(productDTO);
+        tripRepository.save(s);
     }
 
-    public Optional<Trips> findProducts(Long id) {
-        return tripsRepository.findProductById(id);
+    public Optional<Trip> findProducts(Long id) {
+        return tripRepository.findProductById(id);
     }
 
-    public List<Trips> findTripsToEdit(String query, String destination) {
+    public List<Trip> findTripsToEdit(String query, String destination) {
         return findTripsToEdit(query, destination);
     }
 
 
-    public List<Trips> findAllTrips(){
-        return tripsRepository.findAll();
+    public List<Trip> findAllTrips(){
+        return tripRepository.findAll();
     }
 
+    public void addNewTrips(AddTripDTO addTripDTO){
+        Trip trip = AddTripDTOBuilder.rewriteToTrip(addTripDTO);
+//        if(tripRepository.existByTripDestination(trip.getTripDestination())){
+//            throw new TripExistsException("Trip with destination " + trip.getTripDestination() + "already exists in database");
+//        } else {
+            tripRepository.save(trip);
+
+
+    }
 
     @PostConstruct
     private void mockTrips() {

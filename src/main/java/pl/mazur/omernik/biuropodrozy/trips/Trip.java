@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
-public class Trips extends BaseEntity {
+public class Trip extends BaseEntity {
 
     private String tripDestination;
     private String continent;
@@ -26,7 +26,8 @@ public class Trips extends BaseEntity {
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;
     private Integer numberOfDays;
+    private Integer price;
 
-//    private Trip trip;
+
 
 }

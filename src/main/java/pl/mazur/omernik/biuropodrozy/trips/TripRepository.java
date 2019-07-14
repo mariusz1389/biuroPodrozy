@@ -7,11 +7,13 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.List;
 import java.util.Optional;
 
-public interface TripsRepository<T extends Trips> extends JpaRepository<Trips, Long>, QuerydslPredicateExecutor<Trips> {
+public interface TripRepository<T extends Trip> extends JpaRepository<Trip, Long>, QuerydslPredicateExecutor<Trip> {
 
     Optional<T> findProductById(Long id);
 
-    List<T> findTripsByTripDestination(Trips destination);
+    List<T> findTripsByTripDestination(Trip destination);
+
+//    boolean existByTripDestination(String destination);
 
 //    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
 //    List<T> findTripsByTripTitleLike(String title);
