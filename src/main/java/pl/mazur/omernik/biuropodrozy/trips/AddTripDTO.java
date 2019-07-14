@@ -23,9 +23,9 @@ public class AddTripDTO {
     @NotBlank(message = "Pole musi zostać wypełnione")
     private String hotel;
     @NotNull(message = "Pole musi zostać wypełnione")
-    private LocalDate timeOfDeparture;
+    private String timeOfDeparture;
     @NotNull(message = "Pole musi zostać wypełnione")
-    private LocalDate timeOfArrival;
+    private String timeOfArrival;
     @NotNull(message = "Pole musi zostać wypełnione")
     private Integer numberOfDays;
     @NotNull(message = "Pole musi zostać wypełnione")

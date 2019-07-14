@@ -1,5 +1,8 @@
 package pl.mazur.omernik.biuropodrozy.trips;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 public class AddTripDTOBuilder {
 
     public static Trip rewriteToTrip(AddTripDTO dto) {
@@ -9,8 +12,8 @@ public class AddTripDTOBuilder {
         trip.setCountry(dto.getCountry().trim());
         trip.setAirport(dto.getAirport().trim());
         trip.setHotel(dto.getHotel().trim());
-        trip.setTimeOfDeparture(dto.getTimeOfDeparture());
-        trip.setTimeOfArrival(dto.getTimeOfArrival());
+        trip.setTimeOfDeparture(LocalDate.parse(dto.getTimeOfDeparture()));
+        trip.setTimeOfArrival(LocalDate.parse(dto.getTimeOfArrival()));
         trip.setNumberOfDays(dto.getNumberOfDays());
         trip.setPrice(dto.getPrice());
         return trip;
