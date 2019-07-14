@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
->
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--    <div th:replace="fragments/header :: header-css"/>-->
     <title>Pierwsza strona</title>
 
     <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
@@ -20,30 +17,45 @@
 <div class="container-fluid">
 
     <div class="row">
-        <h1>Wycieczka</h1>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Twoja wycieczka</th>
-                <th>Cel</th>
-                <th>Cena</th>
-                <th>Data wylotu</th>
-                <th>Data przylotu</th>
-                <th>Ilość dni</th>
-            </tr>
-            <tr th:each="trip,iterationStatus : ${trips}">
-                <td th:text="${iterationStatus.count}">1</td>
-                <td th:text="${trip}">Twoja wycieczka</td>
-            </tr>
-        </table>
+            <h1>Pętla w thymeleaf</h1>
+            <h1>Wycieczki</h1>
+
+            <table>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Cel podróży</th>
+                    <th>Hotel</th>
+                    <th>Data wylotu</th>
+                    <th>Data przylotu</th>
+                    <th>Ilosc dni</th>
+
+                </tr>
+
+
+                <tr th:each="trips,iterationStatus : ${trips}">
+
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${trips.tripDestination}">Name</td>
+                    <td th:text="${trips.hotel}">Hotel</td>
+                    <td th:text="${trips.timeOfDeparture}">Departure</td>
+                    <td th:text="${trips.timeOfArrival}">Arrival</td>
+                    <td th:text="${trips.numberOfDays}">Length</td>
+
+
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <div class="col-md-4">
+        </div>
+
     </div>
-
-
-    <div class="col-md-4">
-    </div>
-
-</div>
 
 </div>
 <script src="js/jquery.min.js"></script>
