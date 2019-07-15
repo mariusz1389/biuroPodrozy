@@ -1,12 +1,10 @@
-package pl.mazur.omernik.biuropodrozy.trips;
+package pl.mazur.omernik.biuropodrozy.trip;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
 
 @Getter
 @Setter

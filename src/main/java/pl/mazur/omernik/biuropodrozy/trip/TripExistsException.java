@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.trips;
+package pl.mazur.omernik.biuropodrozy.trip;
 
 public class TripExistsException extends RuntimeException {
 

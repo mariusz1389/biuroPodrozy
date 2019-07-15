@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.trips;
+package pl.mazur.omernik.biuropodrozy.trip;
 
 import lombok.*;
 

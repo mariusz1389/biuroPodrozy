@@ -3,7 +3,7 @@ package pl.mazur.omernik.biuropodrozy.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.mazur.omernik.biuropodrozy.BaseEntity;
+import pl.mazur.omernik.biuropodrozy.Entity.BaseEntity;
 
 import javax.persistence.Entity;
 

@@ -1,7 +1,8 @@
-package pl.mazur.omernik.biuropodrozy.trips;
+package pl.mazur.omernik.biuropodrozy.trip;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.mazur.omernik.biuropodrozy.reposityory.TripRepository;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;

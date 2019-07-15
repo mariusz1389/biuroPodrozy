@@ -1,11 +1,8 @@
-package pl.mazur.omernik.biuropodrozy.trips;
+package pl.mazur.omernik.biuropodrozy.trip;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.mazur.omernik.biuropodrozy.reposityory.AirportRepository;
-import pl.mazur.omernik.biuropodrozy.reposityory.ContinentRepository;
-import pl.mazur.omernik.biuropodrozy.reposityory.CountryRepository;
-import pl.mazur.omernik.biuropodrozy.reposityory.HotelRepository;
+import pl.mazur.omernik.biuropodrozy.reposityory.*;
 
 @Service
 public class TripToProductDTOBuilder {
