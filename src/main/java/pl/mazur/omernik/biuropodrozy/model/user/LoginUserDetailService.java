@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.mazur.omernik.biuropodrozy.model.LoginUser;
 import pl.mazur.omernik.biuropodrozy.model.User;
-import pl.mazur.omernik.biuropodrozy.reposityory.UserRepository;
 
 import java.util.Optional;
 
@@ -18,12 +17,12 @@ public class LoginUserDetailService implements UserDetailsService {
     private UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws
+    public UserDetails loadUserByUsername(String userName) throws
             UsernameNotFoundException {
-        Optional<User> user = repository.findByLogin(login);
+        Optional<User> user = repository.findByUsername(userName);
         if (user.isPresent()) {
             return new LoginUser(user.get());
         }
-        throw new UsernameNotFoundException(login);
+        throw new UsernameNotFoundException(userName);
     }
 }

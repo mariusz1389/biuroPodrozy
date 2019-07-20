@@ -14,20 +14,20 @@ import pl.mazur.omernik.biuropodrozy.model.user.UserService;
 @RestController
 public class UserController {
 
-
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("/register")
-    public ModelAndView register() {
-        ModelAndView modelAndView = new ModelAndView("register");
-        return modelAndView;
-    }
-
-    @PostMapping
-    public ModelAndView register(@ModelAttribute User user) {
-        userService.save(user);
-        return new ModelAndView("login");
-    }
+//
+//    @Autowired
+//    private UserService userService;
+//
+//    @GetMapping("/register")
+//    public ModelAndView register() {
+//        ModelAndView modelAndView = new ModelAndView("register");
+//        return modelAndView;
+//    }
+//
+//    @PostMapping
+//    public ModelAndView register(@ModelAttribute User user) {
+//        userService.save(user);
+//        return new ModelAndView("login");
+//    }
 
 }
