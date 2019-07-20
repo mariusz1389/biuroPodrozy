@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy;
+package pl.mazur.omernik.biuropodrozy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
