@@ -12,4 +12,5 @@ public enum RoleTypeEnum {
     RoleTypeEnum(String roleName){
         this.roleName = roleName;
     }
+    //comment
 }

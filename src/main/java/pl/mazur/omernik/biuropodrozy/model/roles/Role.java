@@ -16,4 +16,5 @@ import javax.persistence.Entity;
 public class Role extends BaseEntity {
 
     private String roleName;
+    //comment
 }
