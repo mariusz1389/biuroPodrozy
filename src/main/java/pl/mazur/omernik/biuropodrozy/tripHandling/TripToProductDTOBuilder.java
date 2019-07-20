@@ -1,7 +1,8 @@
-package pl.mazur.omernik.biuropodrozy.trip;
+package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.mazur.omernik.biuropodrozy.model.Trip;
 import pl.mazur.omernik.biuropodrozy.reposityory.*;
 
 @Service
@@ -26,10 +27,10 @@ public class TripToProductDTOBuilder {
         return TripDTO.builder()
                 .id(trip.getId())
                 .tripDestination(trip.getTripDestination())
-//                .continenId(Optional.ofNullable(trip.getContinent()).map(e -> e.getId()).orElse(null))
-//                .countryId(Optional.ofNullable(trip.getContinent()).map(e -> e.getId()).orElse(null))
-//                .airportId(Optional.ofNullable(trip.getContinent()).map(e -> e.getId()).orElse(null))
-//                .hotelId(Optional.ofNullable(trip.getContinent()).map(e -> e.getId()).orElse(null))
+//                .continenId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
+//                .countryId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
+//                .airportId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
+//                .hotelId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
                 .timeOfDeparture(trip.getTimeOfDeparture())
                 .timeOfArrival(trip.getTimeOfArrival())
                 .numberOfDays(trip.getNumberOfDays())
@@ -45,13 +46,13 @@ public class TripToProductDTOBuilder {
         }
 
         trip.setTripDestination(dto.getTripDestination());
-//        trip.setContinent(Optional.ofNullable(dto.getContinenId())
+//        tripHandling.setContinent(Optional.ofNullable(dto.getContinenId())
 //                .map(continentRepository::getOne).orElse(null));
-//        trip.setCountry(Optional.ofNullable(dto.getCountryId())
+//        tripHandling.setCountry(Optional.ofNullable(dto.getCountryId())
 //                .map(countryRepository::getOne).orElse(null));
-//        trip.setAirport(Optional.ofNullable(dto.getAirportId())
+//        tripHandling.setAirport(Optional.ofNullable(dto.getAirportId())
 //                .map(airportRepository::getOne).orElse(null));
-//        trip.setHotel(Optional.ofNullable(dto.getHotelId())
+//        tripHandling.setHotel(Optional.ofNullable(dto.getHotelId())
 //                .map(hotelRepository::getOne).orElse(null));
         trip.setTimeOfDeparture(dto.getTimeOfDeparture());
         trip.setTimeOfArrival(dto.getTimeOfArrival());

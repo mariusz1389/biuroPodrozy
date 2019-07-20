@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.mazur.omernik.biuropodrozy.trip.AddTripDTO;
-import pl.mazur.omernik.biuropodrozy.trip.TripService;
+import pl.mazur.omernik.biuropodrozy.tripHandling.AddTripDTO;
+import pl.mazur.omernik.biuropodrozy.tripHandling.TripService;
 
 import javax.validation.Valid;
 

@@ -1,7 +1,8 @@
-package pl.mazur.omernik.biuropodrozy.trip;
+package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.mazur.omernik.biuropodrozy.model.Trip;
 import pl.mazur.omernik.biuropodrozy.reposityory.TripRepository;
 
 import javax.annotation.PostConstruct;
@@ -56,8 +57,8 @@ public class TripService {
 
     public void addNewTrips(AddTripDTO addTripDTO){
         Trip trip = AddTripDTOBuilder.rewriteToTrip(addTripDTO);
-//        if(tripRepository.existByTripDestination(trip.getTripDestination())){
-//            throw new TripExistsException("Trip with destination " + trip.getTripDestination() + "already exists in database");
+//        if(tripRepository.existByTripDestination(tripHandling.getTripDestination())){
+//            throw new TripExistsException("Trip with destination " + tripHandling.getTripDestination() + "already exists in database");
 //        } else {
             tripRepository.save(trip);
     }

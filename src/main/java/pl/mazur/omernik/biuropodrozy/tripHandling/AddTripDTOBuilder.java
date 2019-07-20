@@ -1,4 +1,6 @@
-package pl.mazur.omernik.biuropodrozy.trip;
+package pl.mazur.omernik.biuropodrozy.tripHandling;
+
+import pl.mazur.omernik.biuropodrozy.model.Trip;
 
 import java.time.LocalDate;
 

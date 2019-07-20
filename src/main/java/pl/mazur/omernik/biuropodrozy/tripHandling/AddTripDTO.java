@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.trip;
+package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import lombok.Getter;
 import lombok.Setter;

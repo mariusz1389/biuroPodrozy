@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy;
+package pl.mazur.omernik.biuropodrozy.model.user;
 
 import org.springframework.stereotype.Service;
 import pl.mazur.omernik.biuropodrozy.model.User;

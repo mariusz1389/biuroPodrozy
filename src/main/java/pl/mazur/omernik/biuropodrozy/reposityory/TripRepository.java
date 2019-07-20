@@ -3,7 +3,7 @@ package pl.mazur.omernik.biuropodrozy.reposityory;
 import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import pl.mazur.omernik.biuropodrozy.trip.Trip;
+import pl.mazur.omernik.biuropodrozy.model.Trip;
 
 import java.util.List;
 import java.util.Optional;
