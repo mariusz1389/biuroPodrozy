@@ -8,17 +8,7 @@ import pl.mazur.omernik.biuropodrozy.reposityory.*;
 @Service
 public class TripToProductDTOBuilder {
 
-    @Autowired
-    private ContinentRepository continentRepository;
 
-    @Autowired
-    private CountryRepository countryRepository;
-
-    @Autowired
-    private HotelRepository hotelRepository;
-
-    @Autowired
-    private AirportRepository airportRepository;
 
     @Autowired
     private TripRepository<Trip> tripRepository;

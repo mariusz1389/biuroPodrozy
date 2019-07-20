@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import UserService;
+
 import pl.mazur.omernik.biuropodrozy.model.User;
+import pl.mazur.omernik.biuropodrozy.model.user.UserService;
 
 
 @RestController
