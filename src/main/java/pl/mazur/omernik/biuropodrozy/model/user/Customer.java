@@ -3,6 +3,7 @@ package pl.mazur.omernik.biuropodrozy.model.user;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
+import pl.mazur.omernik.biuropodrozy.Orders.Order;
 import pl.mazur.omernik.biuropodrozy.model.User;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ public class Customer extends User {
     boolean preferEmails;
     boolean existByUsername;
 
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-//    private List<Order> ordersList = Lists.newArrayList();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> ordersList = Lists.newArrayList();
 
 }

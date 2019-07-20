@@ -6,6 +6,7 @@ import pl.mazur.omernik.biuropodrozy.Entity.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @ToString
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 
 public class Trip extends BaseEntity {
 
+    private Integer stockAmount;
     private String tripDestination;
     private String continent;
     private String country;
@@ -26,7 +28,7 @@ public class Trip extends BaseEntity {
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;
     private Integer numberOfDays;
-    private Integer price;
+    private BigDecimal price;
 
 
 
