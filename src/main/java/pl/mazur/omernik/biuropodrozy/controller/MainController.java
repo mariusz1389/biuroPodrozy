@@ -7,87 +7,59 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
 import pl.mazur.omernik.biuropodrozy.model.user.CustomerRegistrationDto;
 import pl.mazur.omernik.biuropodrozy.model.user.UserExistsException;
 import pl.mazur.omernik.biuropodrozy.model.user.UserRegistrationService;
-import pl.mazur.omernik.biuropodrozy.tripHandling.TripService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class MainController {
 
     @Autowired
-    private TripService tripService;
-
-
-
-    List<Trip> trip = new ArrayList<>();
-
-    public String someText = "Nowa Wycieczka!";
-
-    @GetMapping("/trip")
-    public ModelAndView getMain() {
-        ModelAndView m = new ModelAndView("index");
-        m.setViewName("index");
-        m.addObject("someText", someText);
-        initTrip();
-        m.addObject("trips", trip);
-        return m;
-    }
-
-    public void initTrip() {
-
-        trip = tripService.findAllTrips();
-
-    }
-    @Autowired
     private UserRegistrationService userRegistrationService;
 
     @GetMapping("/")
-    public String home() {
-        return "index";
-    }
+    public ModelAndView home() {
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "HI";
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public ModelAndView login() {
+
+        ModelAndView modelAndView = new ModelAndView("/login");
+        return modelAndView;
     }
 
-    @GetMapping(value = "/register")
-    public String registerForm(Model model) {
-        model.addAttribute("customerFormData", new CustomerRegistrationDto());
-//        model.addAttribute("countries", Countries.values());
 
-        return "registerForm";
+
+    @GetMapping(value = "/register")
+    public ModelAndView registerForm(Model model) {
+        model.addAttribute("customerFormData", new CustomerRegistrationDto());
+        ModelAndView modelAndView = new ModelAndView("registerForm");
+        return modelAndView;
     }
 
     @PostMapping(value = "/register")
-    public String registerEffect(@ModelAttribute(name = "customerFormData")
-                                 @Valid CustomerRegistrationDto customerFormData, BindingResult bindingResult, Model model) {
+    public ModelAndView registerEffect(@ModelAttribute(name = "customerFormData")
+                                 @Valid CustomerRegistrationDto customerFormData,
+                                 BindingResult bindingResult,
+                                 Model model) {
+        ModelAndView modelAndView = new ModelAndView("registerForm");
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("countries", Countries.values());
-            return "registerForm";
+            return modelAndView;
         }
         try {
             userRegistrationService.registerUser(customerFormData);
         } catch (UserExistsException e) {
             model.addAttribute("userExistsException", e.getMessage());
-            return "registerForm";
+            return modelAndView;
         }
         model.addAttribute("registrationData", customerFormData);
-        return "registerEffect";
+        return new ModelAndView("registerEffect");
     }
 
 

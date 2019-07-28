@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -27,5 +28,5 @@ public class AddTripDTO {
     @NotNull(message = "Pole musi zostać wypełnione")
     private Integer numberOfDays;
     @NotNull(message = "Pole musi zostać wypełnione")
-    private Integer price;
+    private BigDecimal price;
 }

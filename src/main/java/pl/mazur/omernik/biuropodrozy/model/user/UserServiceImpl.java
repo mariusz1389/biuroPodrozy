@@ -3,7 +3,6 @@ package pl.mazur.omernik.biuropodrozy.model.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.mazur.omernik.biuropodrozy.model.User;
 
 import java.util.Optional;
 

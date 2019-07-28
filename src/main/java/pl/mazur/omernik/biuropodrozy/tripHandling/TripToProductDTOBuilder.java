@@ -3,7 +3,6 @@ package pl.mazur.omernik.biuropodrozy.tripHandling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.mazur.omernik.biuropodrozy.model.Trip;
-import pl.mazur.omernik.biuropodrozy.reposityory.*;
 
 @Service
 public class TripToProductDTOBuilder {
@@ -16,6 +15,7 @@ public class TripToProductDTOBuilder {
     public TripDTO buildDto(Trip trip) {
         return TripDTO.builder()
                 .id(trip.getId())
+                .tripType(trip.getTripType())
                 .tripDestination(trip.getTripDestination())
 //                .continenId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
 //                .countryId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
@@ -30,11 +30,16 @@ public class TripToProductDTOBuilder {
     public Trip buildEntity(TripDTO dto) {
         Trip trip;
         if (dto.getId() == null) {
-            trip = new Trip();
+            if (dto.getTripType().isPromotion()){
+                trip = new PromotionalTrip();
+            }else {
+                trip = new NonPromotionTrip();
+            }
         } else {
             trip = tripRepository.getOne(dto.getId());
         }
 
+        trip.setTripType(dto.getTripType());
         trip.setTripDestination(dto.getTripDestination());
 //        tripHandling.setContinent(Optional.ofNullable(dto.getContinenId())
 //                .map(continentRepository::getOne).orElse(null));

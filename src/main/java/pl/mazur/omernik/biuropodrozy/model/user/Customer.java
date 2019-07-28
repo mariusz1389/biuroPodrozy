@@ -3,8 +3,7 @@ package pl.mazur.omernik.biuropodrozy.model.user;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
-import pl.mazur.omernik.biuropodrozy.Orders.Order;
-import pl.mazur.omernik.biuropodrozy.model.User;
+import pl.mazur.omernik.biuropodrozy.orders.Order;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;

@@ -2,6 +2,7 @@ package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -21,5 +22,6 @@ public class TripDTO {
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;
     private Integer numberOfDays;
-    private Integer price;
+    private BigDecimal price;
+    private TripType tripType;
 }

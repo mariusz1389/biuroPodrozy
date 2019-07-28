@@ -1,11 +1,10 @@
 package pl.mazur.omernik.biuropodrozy.model;
 
 import lombok.*;
-import pl.mazur.omernik.biuropodrozy.Entity.BaseEntity;
+import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
+import pl.mazur.omernik.biuropodrozy.tripHandling.TripType;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -29,6 +28,8 @@ public class Trip extends BaseEntity {
     private LocalDate timeOfArrival;
     private Integer numberOfDays;
     private BigDecimal price;
+    @Enumerated(EnumType.STRING)
+    private TripType tripType;
 
 
 

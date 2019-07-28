@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.Entity;
+package pl.mazur.omernik.biuropodrozy.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

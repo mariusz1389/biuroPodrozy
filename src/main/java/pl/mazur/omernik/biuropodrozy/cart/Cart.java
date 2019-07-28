@@ -3,7 +3,7 @@ package pl.mazur.omernik.biuropodrozy.cart;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
-import pl.mazur.omernik.biuropodrozy.Orders.OrderLine;
+import pl.mazur.omernik.biuropodrozy.orders.OrderLine;
 
 import java.util.List;
 

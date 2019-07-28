@@ -1,52 +1,75 @@
-package pl.mazur.omernik.biuropodrozy.Config;
+package pl.mazur.omernik.biuropodrozy.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.mazur.omernik.biuropodrozy.model.user.LoginUserDetailService;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final DataSource dataSource;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private LoginUserDetailService userService;
 
+    @Autowired
+    public WebSecurityConfig(DataSource dataSource, PasswordEncoder bCryptPasswordEncoder) {
+        this.dataSource = dataSource;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/index", "/register").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/trip/**").hasAnyAuthority( "ROLE_USER")
+                .antMatchers("/h2/**").permitAll()
+                .anyRequest().permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .csrf().disable()
+                .headers().frameOptions().disable().and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout().
-                permitAll();
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-
-
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login-process")
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/").and()
+                .logout().logoutSuccessUrl("/login");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("admin@admin.pl")
+                .password(bCryptPasswordEncoder.encode("admin12345"))
+                .roles("ADMIN");
+        auth.jdbcAuthentication()
+                .usersByUsernameQuery("SELECT u.username, u.password_hash,1 FROM user u WHERE u.username=?")
+                .authoritiesByUsernameQuery("SELECT u.username, r.role_name, 1 " +
+                        "FROM user u " +
+                        "INNER JOIN user_role ur ON ur.user_id = u.id " +
+                        "INNER JOIN role r ON r.id = ur.roles_id " +
+                        "WHERE u.username=?")
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
 
 

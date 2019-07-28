@@ -1,53 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>Pierwsza strona</title>
+    <div th:replace="fragments/header :: header-css"/>
 
-    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{css/style.css}" rel="stylesheet">
-
-</head>
 <body>
-
-
-<div class="container-fluid">
-    <div class="row">
-        <h1>Namiastka luksusu</h1>
-        <h1>Wycieczki</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Cel podróży</th>
-                <th>Hotel</th>
-                <th>Data wylotu</th>
-                <th>Data przylotu</th>
-                <th>Ilosc dni</th>
-            </tr>
-            <tr th:each="trip,iterationStatus : ${trips}">
-                <td th:text="${iterationStatus.count}">1</td>
-                <td th:text="${trip.tripDestination}">Name</td>
-                <td th:text="${trip.hotel}">Hotel</td>
-                <td th:text="${trip.timeOfDeparture}">Departure</td>
-                <td th:text="${trip.timeOfArrival}">Arrival</td>
-                <td th:text="${trip.numberOfDays}">Length</td>
-            </tr>
-
-        </table>
-    </div>
-
-
-    <div class="col-md-4">
-    </div>
-</div>
-
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/scripts.js"></script>
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
+
 </html>

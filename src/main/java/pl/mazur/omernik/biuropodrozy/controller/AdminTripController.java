@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import pl.mazur.omernik.biuropodrozy.tripHandling.AddTripDTO;
 import pl.mazur.omernik.biuropodrozy.tripHandling.TripService;
 
@@ -22,18 +23,22 @@ public class AdminTripController {
     private TripService tripService;
 
     @GetMapping(value = "/addTrip")
-    public String administrateTrips(Model model) {
+    public ModelAndView administrateTrips(Model model) {
+        ModelAndView modelAndView = new ModelAndView("addTrip");
         model.addAttribute("addNewTrip", new AddTripDTO());
-        return "addTrip";
+        return modelAndView;
     }
 
     @PostMapping(value = "/addTrip")
-    public String addTripEffect(@ModelAttribute(name = "addNewTrip")
-                                @Valid AddTripDTO addNewTripDTO, BindingResult bindingResult, Model model) {
+    public ModelAndView addTripEffect(@ModelAttribute(name = "addNewTrip")
+                                @Valid AddTripDTO addNewTripDTO, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("addTrip");
         if (bindingResult.hasErrors()) {
-            return "addTrip";
+            return modelAndView;
         }
         tripService.addNewTrips(addNewTripDTO);
-        return "addTripEffect";
+        return new ModelAndView("addTripEffect");
     }
+
+
 }

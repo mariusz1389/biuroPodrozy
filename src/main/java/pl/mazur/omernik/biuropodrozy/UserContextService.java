@@ -7,10 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
-import pl.mazur.omernik.biuropodrozy.Orders.OrderLine;
+import pl.mazur.omernik.biuropodrozy.orders.OrderLine;
 import pl.mazur.omernik.biuropodrozy.cart.Cart;
 import pl.mazur.omernik.biuropodrozy.model.Trip;
-import pl.mazur.omernik.biuropodrozy.model.roles.RoleTypeEnum;
+import pl.mazur.omernik.biuropodrozy.model.user.roles.RoleTypeEnum;
+
 
 import java.util.List;
 import java.util.Optional;

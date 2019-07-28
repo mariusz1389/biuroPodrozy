@@ -1,61 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
+    <meta charset="UTF-8">
     <title>Dodawanie wycieczek</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <th:block th:replace="fragments/header :: header-css"/>
-    <link rel="stylesheet" th:href="@{/css/signin.css}"/>
+
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<form th:action="@{/admin/addTrip}" th:object="${addNewTrip}" method="post" class="form-signin">
 
-<!--    <p class="error" th:text="${tripExistException}"></p>-->
+<form th:action="@{/admin/addTrip}" th:object="${addNewTrip}" method="post">
 
-    <label for="destination">Cel podróży:</label>
-    <input id="destination" type="text" th:field="*{tripDestination}"  autofocus class="form-control"/>
+    <input id="desitnation" type="text" name="tripDestination" placeholder="Cel podróży" th:field="*{tripDestination}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="continent">Kontynent:</label>
-    <input id="continent" type="text" th:field="*{continent}" autofocus class="form-control"/>
+    <input id="continent" type="text" name="continent" placeholder="Kontrynent" th:field="*{continent}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="country">Kraj:</label>
-    <input id="country" type="text" th:field="*{country}" autofocus class="form-control"/>
+    <input id="country" type="text" name="contry" placeholder="Kraj" th:field="*{country}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="airport">Lotnisko:</label>
-    <input id="airport" type="text" th:field="*{airport}" autofocus class="form-control"/>
+    <input id="airport" type="text" name="airport" placeholder="Lotnisko" th:field="*{airport}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="hotel">Hotel:</label>
-    <input id="hotel" type="text" th:field="*{hotel}" autofocus class="form-control"/>
+    <input id="hotel" type="text" name="hotel" placeholder="Hotel" th:field="*{hotel}" autofocus/>
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="timeOfDeparture">Data wylotu:</label>
-    <input id="timeOfDeparture" type="text" th:field="*{timeOfDeparture}" autofocus class="form-control"/>
+    <input id="timeOfDeparture" type="text" name="timeofDeparture" placeholder="Wyjazd" th:field="*{timeOfDeparture}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="timeOfArrival">Data przylotu:</label>
-    <input id="timeOfArrival" type="text" th:field="*{timeOfArrival}" autofocus class="form-control"/>
+    <input id="timeOfArrival" type="text" name="timeOfArrival" placeholder="Powrot" th:field="*{timeOfArrival}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="numberOfDays">Ilość dni:</label>
-    <input id="numberOfDays" type="text" th:field="*{numberOfDays}" autofocus class="form-control"/>
+    <input id="numberOfDays" type="text" name="numbersOfDays" placeholder="Ilość dni" th:field="*{numberOfDays}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
-    <label for="price">Cena:</label>
-    <input id="price" type="text" th:field="*{price}" autofocus class="form-control"/>
+    <input id="price" type="text" name="price" placeholder="Cena" th:field="*{price}" />
     <div class="error" th:errors="*{tripDestination}"></div>
 
+    <select name="tripType">
+        <option th:value="''" th:text="'Typ wycieczki'"></option>
+        <option th:each="pt : ${tripType}" th:value="${pt}" th:text="${pt.type}"></option>
+    </select>
 
+    <button>dodaj wycieczke</button>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">dodaj wycieczke</button>
-
-
-    <div th:replace="fragments/footer :: footer"></div>
 </form>
-
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

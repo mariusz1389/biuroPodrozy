@@ -4,9 +4,9 @@ import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.mazur.omernik.biuropodrozy.model.roles.Role;
-import pl.mazur.omernik.biuropodrozy.model.roles.RoleRepository;
-import pl.mazur.omernik.biuropodrozy.model.roles.RoleTypeEnum;
+import pl.mazur.omernik.biuropodrozy.model.user.roles.Role;
+import pl.mazur.omernik.biuropodrozy.model.user.roles.RoleRepository;
+import pl.mazur.omernik.biuropodrozy.model.user.roles.RoleTypeEnum;
 
 import java.util.Optional;
 

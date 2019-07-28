@@ -10,23 +10,12 @@ public class CartService {
     public BigDecimal calculateTotalCartPrice(Cart cart) {
         BigDecimal productsPrice = cart.getOrderLines()
                 .stream()
-                .map(e -> e.getProductPrice()
+                .map(e -> e.getTripPrice()
                         .multiply(BigDecimal.valueOf(e.getQuantity()))).reduce((a, b) -> a.add(b))
                 .orElse(BigDecimal.ZERO);
-        return productsPrice.add(calculateDelivery(cart,productsPrice));
+        return productsPrice.add(productsPrice);
     }
 
-    public BigDecimal calculateDelivery(Cart cart, BigDecimal productsPrice) {
-        if (cart.getOrderLines().stream().allMatch(ol -> ol.getProduct().getProductType().isElectronic())) {
-            return BigDecimal.ZERO;
-        }
-        if (productsPrice.compareTo(BigDecimal.valueOf(200.0)) > 0) {
-            return BigDecimal.ZERO;
-        }
-        if (productsPrice.compareTo(BigDecimal.valueOf(100.0)) > 0) {
-            return BigDecimal.ONE;
-        }
-        return BigDecimal.TEN;
-    }
+
 
 }
