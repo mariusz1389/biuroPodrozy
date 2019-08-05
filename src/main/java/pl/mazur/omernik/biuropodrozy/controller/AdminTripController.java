@@ -23,7 +23,7 @@ public class AdminTripController {
     private TripService tripService;
 
     @PostMapping(value = "/trip/add")
-    public String addProduct(@RequestParam String tripDestionation,
+    public String addTrip(@RequestParam String tripDestionation,
                              @RequestParam Integer stockAmount,
                              @RequestParam BigDecimal price,
                              @RequestParam TripType productType,
@@ -41,7 +41,7 @@ public class AdminTripController {
     }
 
     @GetMapping(value = "/trip")
-    public String addProduct(Model model) {
+    public String addTrip(Model model) {
         model.addAttribute("tripTypes", TripType.values());
         return "addTrip";
     }
@@ -65,7 +65,7 @@ public class AdminTripController {
 
 
     @GetMapping(value = "/trips")
-    public String showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType, Model model) {
+    public String showTrips(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType, Model model) {
         model.addAttribute("tripList", tripService.findTripsToEdit(query, tripType));
         model.addAttribute("tripTypes", TripType.values());
         model.addAttribute("query", StringUtils.defaultIfBlank(query, ""));
