@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.model.user.roles;
+package pl.mazur.omernik.biuropodrozy.model.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.mazur.omernik.biuropodrozy.model.user.Customer;

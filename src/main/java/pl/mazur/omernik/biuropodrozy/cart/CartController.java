@@ -15,14 +15,14 @@ import pl.mazur.omernik.biuropodrozy.tripHandling.TripRepository;
 public class CartController {
 
     @Autowired
-    private TripRepository<Trip> productRepository;
+    private TripRepository<Trip> tripRepository;
 
     @Autowired
     private UserContextService userContextService;
 
     @PostMapping("/addToCart")
     public ResponseEntity<String> addToCart(@RequestParam(required = false) String prodId) {
-        productRepository.findProductById(Long.valueOf(prodId)).ifPresent(userContextService::addProductToCart);
+        tripRepository.findProductById(Long.valueOf(prodId)).ifPresent(userContextService::addProductToCart);
         return ResponseEntity.ok().body(userContextService.getCartAsJson());
     }
 

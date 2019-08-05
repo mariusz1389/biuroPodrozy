@@ -10,8 +10,8 @@ import javax.validation.constraints.Pattern;
 @Setter
 public class CustomerRegistrationDto {
 
-    @NotBlank(message = "Pole musi zostać wypełnione")
-    private String username;
+    @Pattern(regexp = "^[\\w\\.]+@[\\w]+\\.[\\w]+(\\.[a-z]{2,3})?$", message = "Zły format adresu email")
+    private String email;
     @Pattern(regexp = "^[\\p{Lu}][\\p{Ll}]{2,}$", message = "Wymagane przynajmniej 3 znaki(pierwsza litera duża, reszta małe).")
     private String firstName;
     @Pattern(regexp = "^[\\p{Lu}][\\p{Ll}]{2,}(-[\\p{Lu}][\\p{Ll}]{2,})?$", message = "Wymagane przynajmniej 3 znaki(pierwsza litera duża, można podać także nazwisko dwuczłonowe).")
@@ -24,6 +24,6 @@ public class CustomerRegistrationDto {
     private String city;
     @NotBlank(message = "Pole musi zostać wypełnione")
     private String zipCode;
-
+    private boolean preferEmails;
 
 }

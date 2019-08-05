@@ -12,7 +12,7 @@ import pl.mazur.omernik.biuropodrozy.model.Trip;
 import pl.mazur.omernik.biuropodrozy.tripHandling.database.DataTablesOrder;
 import pl.mazur.omernik.biuropodrozy.tripHandling.database.DataTablesResponse;
 
-import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -28,13 +28,17 @@ public class TripService {
     private TripRepository<Trip> tripRepository;
 
     @Autowired
-    private TripToProductDTOBuilder tripToProductDTOBuilder;
+    private TripToTripDTOBuilder tripToTripDTOBuilder;
 
-    public void createNewProduct(String tripDestination, String continent, String country
-            , String airport, String hotel, LocalDate timeOfDeparture
-            , LocalDate timeOfArrival, int numberOfDays) {
-        Trip trip = new Trip();
+    public void createNewTrip(String tripDestination, Integer stockamount, BigDecimal price,
+                                 TripType tripType, String continent, String country,
+                                 String pictureURL, String airport,
+                                 String hotel, LocalDate timeOfDeparture, LocalDate timeOfArrival, int numberOfDays) {
+        Trip trip = tripType == TripType.NORMAL ? new NonPromotionTrip() : new PromotionalTrip();
         trip.setTripDestination(tripDestination);
+        trip.setStockAmount(stockamount);
+        trip.setPrice(price);
+        trip.setPictureUrl(pictureURL);
         trip.setContinent(continent);
         trip.setCountry(country);
         trip.setAirport(airport);
@@ -46,45 +50,44 @@ public class TripService {
         tripRepository.save(trip);
     }
 
-    public void updateTrips(TripDTO productDTO) {
-        Trip s = tripToProductDTOBuilder.buildEntity(productDTO);
+    public void updateTrip(TripDTO productDTO) {
+        Trip s = tripToTripDTOBuilder.buildEntity(productDTO);
         tripRepository.save(s);
     }
 
-    public Optional<Trip> findTripId(Long id) {
+    public Optional<Trip> findTrips(Long id) {
         return tripRepository.findProductById(id);
     }
 
-    public List<Trip> findTrips(String query, String destination) {
-        return findTrips(query, destination);
+    public List<Trip> findTripsToEdit(String query, String productType) {
+        return findTrips(query, productType);
     }
 
 
-    public List<Trip> findAllTrips(){
-        return tripRepository.findAll();
-    }
 
-    public void addNewTrips(AddTripDTO addTripDTO){
-        Trip trip = AddTripDTOBuilder.rewriteToTrip(addTripDTO);
-            tripRepository.save(trip);
-    }
-    private Page<Trip> findTripByDestination(String query, int page, int size, Sort sort) {
-        Function<String, Page<Trip>> supplierForNotBlankQuery = (q) -> tripRepository.findAll(QTrip.trip.tripDestination.likeIgnoreCase("%" + q + "%").and(QTrip.trip.stockAmount.goe(1)), PageRequest.of(page, size, sort));
-        Function<String, Page<Trip>> supplierForBlankQuery = (q) -> tripRepository.findAll(QTrip.trip.stockAmount.goe(1), PageRequest.of(page, size, sort));
-
-        return StringUtils.isBlank(query) ? supplierForBlankQuery.apply(query) : supplierForNotBlankQuery.apply(query);
-    }
-
-    public List<TripDTO> findProductsForCustomer(String query, String tripType) {
+    public List<TripDTO> findTripsForCustomer(String query, String tripType) {
         return findTrips(query, tripType)
                 .stream()
                 .filter(e -> ObjectUtils.defaultIfNull(e.getStockAmount(), 0) > 0)
-                .map(tripToProductDTOBuilder::buildDto)
+                .map(tripToTripDTOBuilder::buildDto)
                 .collect(Collectors.toList());
     }
 
-    private Sort getSort(String name, String direction) {
-        return direction.equalsIgnoreCase(DataTablesOrder.Direction.asc.name()) ? Sort.by(name).ascending() : Sort.by(name).descending();
+    public List<Trip> findTrips(String query, String tripType) {
+        if (StringUtils.isBlank(query) && StringUtils.isBlank(tripType)) {
+            return tripRepository.findAll();
+        }
+        if (StringUtils.isBlank(query)) {
+            return tripRepository.findTripsByTripType(TripType.valueOf(tripType));
+        }
+        if (StringUtils.isBlank(tripType)) {
+            return tripRepository.findTripsByTripDestinationLike(query);
+        }
+        return tripRepository.findByDestinationAndTripType(query, TripType.valueOf(tripType));
+    }
+
+    public Optional<TripDTO> findTripById(Long id) {
+        return tripRepository.findById(id).map(tripToTripDTOBuilder::buildDto);
     }
 
     public DataTablesResponse<TripDTO> getProductDataTable(Integer start, Integer length, String sortColumn, String sortOrder, String searchText) {
@@ -92,20 +95,22 @@ public class TripService {
         Page<Trip> booksByName = findTripByDestination(searchText, start == 0 ? 0 : (start / length), length, getSort(sortColumn, sortOrder));
         dtResponse.setData(booksByName.getContent()
                 .stream()
-                .map(tripToProductDTOBuilder::buildDto)
+                .map(tripToTripDTOBuilder::buildDto)
                 .collect(Collectors.toList()));
         dtResponse.setRecordsTotal((int) booksByName.getTotalElements());
         dtResponse.setRecordsFiltered((int) booksByName.getTotalElements());
         return dtResponse;
     }
 
-    @PostConstruct
-    private void mockTrips() {
-        createNewProduct("Majorka", "Europe", "Spain"
-                , "Malorka Airport", "jakis tam"
-                , LocalDate.of(2019, 06, 04)
-                , LocalDate.of(2019, 06, 04)
-                , 5);
+    private Sort getSort(String name, String direction) {
+        return direction.equalsIgnoreCase(DataTablesOrder.Direction.asc.name()) ? Sort.by(name).ascending() : Sort.by(name).descending();
+    }
+
+    private Page<Trip> findTripByDestination(String query, int page, int size, Sort sort) {
+        Function<String, Page<Trip>> supplierForNotBlankQuery = (q) -> tripRepository.findAll(QTrip.trip.tripDestination.likeIgnoreCase("%" + q + "%").and(QTrip.trip.stockAmount.goe(1)), PageRequest.of(page, size, sort));
+        Function<String, Page<Trip>> supplierForBlankQuery = (q) -> tripRepository.findAll(QTrip.trip.stockAmount.goe(1), PageRequest.of(page, size, sort));
+
+        return StringUtils.isBlank(query) ? supplierForBlankQuery.apply(query) : supplierForNotBlankQuery.apply(query);
     }
 
 

@@ -15,7 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-
+@DiscriminatorColumn(name="system_type",
+        discriminatorType = DiscriminatorType.STRING)
 public class Trip extends BaseEntity {
 
     private Integer stockAmount;
@@ -24,6 +25,7 @@ public class Trip extends BaseEntity {
     private String country;
     private String airport;
     private String hotel;
+    private String pictureUrl;
     private LocalDate timeOfDeparture;
     private LocalDate timeOfArrival;
     private Integer numberOfDays;

@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TripType {
 
-    LASTMINUTE("lastminute", false), NORMAL("normal", false), EARLYBIRD("eralybird", true);
+    LASTMINUTE("lastminute", false), NORMAL("normal", false), EARLYBIRD("earlybird", true);
 
     private String type;
     private boolean promotion;

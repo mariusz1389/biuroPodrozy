@@ -1,6 +1,7 @@
 package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import pl.mazur.omernik.biuropodrozy.model.Trip;
 
@@ -11,14 +12,14 @@ public interface TripRepository<T extends Trip> extends JpaRepository<Trip, Long
 
     Optional<T> findProductById(Long id);
 
-    List<T> findTripsByTripDestination(Trip destination);
+    List<T> findTripsByTripType(TripType tripType);
 
-//    boolean existByTripDestination(String destination);
 
-//    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%')")
-//    List<T> findTripsByTripTitleLike(String title);
-//
-//    @Query("select p from Product p where upper(p.title) like concat('%',upper(?1),'%') and p.productType = ?2")
-//    List<T> findByTitleAndDestionation(String searchText, Trip destination);
+
+    @Query("select t from Trip t where upper(t.tripDestination) like concat('%',upper(?1),'%')")
+    List<T> findTripsByTripDestinationLike(String searchText);
+
+    @Query("select t from Trip t where upper(t.tripDestination) like concat('%',upper(?1),'%') and t.tripType = ?2")
+    List<T> findByDestinationAndTripType(String searchText, TripType tripType);
 
 }

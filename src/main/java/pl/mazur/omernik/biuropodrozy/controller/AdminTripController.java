@@ -1,18 +1,18 @@
 package pl.mazur.omernik.biuropodrozy.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import pl.mazur.omernik.biuropodrozy.tripHandling.AddTripDTO;
+import org.springframework.web.bind.annotation.*;
+import pl.mazur.omernik.biuropodrozy.tripHandling.TripDTO;
 import pl.mazur.omernik.biuropodrozy.tripHandling.TripService;
+import pl.mazur.omernik.biuropodrozy.tripHandling.TripType;
 
-import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -22,23 +22,55 @@ public class AdminTripController {
     @Autowired
     private TripService tripService;
 
-    @GetMapping(value = "/addTrip")
-    public ModelAndView administrateTrips(Model model) {
-        ModelAndView modelAndView = new ModelAndView("addTrip");
-        model.addAttribute("addNewTrip", new AddTripDTO());
-        return modelAndView;
+    @PostMapping(value = "/trip/add")
+    public String addProduct(@RequestParam String tripDestionation,
+                             @RequestParam Integer stockAmount,
+                             @RequestParam BigDecimal price,
+                             @RequestParam TripType productType,
+                             @RequestParam String continent,
+                             @RequestParam String country,
+                             @RequestParam String pictureUrl,
+                             @RequestParam String airport,
+                             @RequestParam String hotel,
+                             @RequestParam LocalDate timeOfDeparture,
+                             @RequestParam LocalDate timeOfArrival,
+                             @RequestParam int numbersOfDays) {
+        tripService.createNewTrip(tripDestionation, stockAmount, price, productType, continent,
+                country, pictureUrl, airport, hotel, timeOfDeparture, timeOfArrival, numbersOfDays);
+        return "redirect:/admin/trips"; // tworzy nowy request na url /trips
     }
 
-    @PostMapping(value = "/addTrip")
-    public ModelAndView addTripEffect(@ModelAttribute(name = "addNewTrip")
-                                @Valid AddTripDTO addNewTripDTO, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("addTrip");
-        if (bindingResult.hasErrors()) {
-            return modelAndView;
+    @GetMapping(value = "/trip")
+    public String addProduct(Model model) {
+        model.addAttribute("tripTypes", TripType.values());
+        return "addTrip";
+    }
+
+    @GetMapping(value = "/trip/{id}")
+    public String editTrip(@PathVariable Long id, Model model) {
+        Optional<TripDTO> tripToEdit = tripService.findTripById(id);
+        if (tripToEdit.isPresent()) {
+            model.addAttribute("tripToEdit", tripToEdit.get());
+            model.addAttribute("tripTypes", TripType.values());
+            return "editTrip";
         }
-        tripService.addNewTrips(addNewTripDTO);
-        return new ModelAndView("addTripEffect");
+        return "redirect:/admin/trip";
     }
 
+    @PostMapping(value = "/trip")
+    public String editTrip(@ModelAttribute TripDTO trip) {
+        tripService.updateTrip(trip);
+        return "redirect:/admin/trips";
+    }
+
+
+    @GetMapping(value = "/trips")
+    public String showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType, Model model) {
+        model.addAttribute("tripList", tripService.findTripsToEdit(query, tripType));
+        model.addAttribute("tripTypes", TripType.values());
+        model.addAttribute("query", StringUtils.defaultIfBlank(query, ""));
+        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(e -> e.name().equals(tripType)).findFirst().orElse(null));
+        return "adminTripList";
+    }
 
 }

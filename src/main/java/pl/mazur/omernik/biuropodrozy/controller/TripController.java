@@ -22,7 +22,7 @@ public class TripController {
 
     @GetMapping("/list")
     public String productsList(@RequestParam(required = false) String text, Model model) {
-        model.addAttribute("trip", tripService.findProductsForCustomer(text, null));
+        model.addAttribute("trip", tripService.findTripsForCustomer(text, null));
         model.addAttribute("query", StringUtils.defaultIfBlank(text, ""));
         model.addAttribute("cartActive", true);
         return "tripList";

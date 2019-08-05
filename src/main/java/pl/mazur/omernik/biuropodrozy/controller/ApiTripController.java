@@ -37,14 +37,14 @@ public class ApiTripController {
     @GetMapping(value = "/trip")
     @ResponseBody
     public ResponseEntity<List<TripDTO>> showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType) {
-        List<TripDTO> productsForCustomer = tripService.findProductsForCustomer(query, tripType);
+        List<TripDTO> productsForCustomer = tripService.findTripsForCustomer(query, tripType);
         return ResponseEntity.ok().body(productsForCustomer);
     }
 
     @GetMapping(value = "/trip/{id}")
     @ResponseBody
     public ResponseEntity<Trip> showProducts(@PathVariable Long id) {
-        return ResponseEntity.ok().body(tripService.findTripId(id).orElse(null));
+        return ResponseEntity.ok().body(tripService.findTrips(id).orElse(null));
     }
 
 

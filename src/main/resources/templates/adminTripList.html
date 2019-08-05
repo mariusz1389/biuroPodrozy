@@ -9,11 +9,11 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<form th:action="@{/admin/products}">
+<form th:action="@{/admin/trips}">
     <input type="text" th:value="${query}" name="query">
     <select name="productType">
         <option th:value="''" th:text="Wybierz"></option>
-        <option th:selected="${productType eq pt}" th:each="pt : ${productTypes}" th:value="${pt}"
+        <option th:selected="${tripType eq pt}" th:each="pt : ${tripTypes}" th:value="${pt}"
                 th:text="${pt.type}"></option>
     </select>
     <button>szukaj</button>
@@ -22,23 +22,21 @@
 <table border="1px">
     <tr>
         <th>Id</th>
-        <th>Nazwa produktu</th>
-        <th>Stan magazynowy</th>
-        <th>Typ produktu</th>
+        <th>Cel podróży</th>
+        <th>Ilość miejsc</th>
+        <th>Typ wycieczki</th>
         <th>Cena</th>
-        <th>Kategoria</th>
         <th>Akcje</th>
     </tr>
-    <tr th:each="product : ${productsList}">
-        <td th:text="${product.id}"></td>
+    <tr th:each="trip : ${tripList}">
+        <td th:text="${trip.id}"></td>
         <td>
-            <span th:text="${product.title}"></span>
+            <span th:text="${trip.tripDestination}"></span>
         </td>
-        <td th:text="${product.stockAmount}"></td>
-        <td th:text="${product.productType.getType()}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.category.id+'. '+ product.category.name}"></td>
-        <td><a th:text="Edytuj" th:href="@{/admin/product/{id}(id=${product.id})}"></a></td>
+        <td th:text="${trip.stockAmount}"></td>
+        <td th:text="${trip.tripType.getType()}"></td>
+        <td th:text="${trip.price}"></td>
+        <td><a th:text="Edytuj" th:href="@{/admin/trip/{id}(id=${trip.id})}"></a></td>
 
     </tr>
 </table>

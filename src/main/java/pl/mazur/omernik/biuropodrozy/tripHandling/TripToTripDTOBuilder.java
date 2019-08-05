@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.mazur.omernik.biuropodrozy.model.Trip;
 
+import java.util.Optional;
+
 @Service
-public class TripToProductDTOBuilder {
+public class TripToTripDTOBuilder {
 
 
 
@@ -17,13 +19,16 @@ public class TripToProductDTOBuilder {
                 .id(trip.getId())
                 .tripType(trip.getTripType())
                 .tripDestination(trip.getTripDestination())
-//                .continenId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
-//                .countryId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
-//                .airportId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
-//                .hotelId(Optional.ofNullable(tripHandling.getContinent()).map(e -> e.getId()).orElse(null))
+                .continent(trip.getContinent())
+                .country(trip.getCountry())
+                .airport(trip.getAirport())
+                .hotel(trip.getHotel())
                 .timeOfDeparture(trip.getTimeOfDeparture())
                 .timeOfArrival(trip.getTimeOfArrival())
                 .numberOfDays(trip.getNumberOfDays())
+                .pictureUrl(trip.getPictureUrl())
+                .price(trip.getPrice())
+                .stockAmount(trip.getStockAmount())
                 .build();
     }//buildDto
 
@@ -41,17 +46,16 @@ public class TripToProductDTOBuilder {
 
         trip.setTripType(dto.getTripType());
         trip.setTripDestination(dto.getTripDestination());
-//        tripHandling.setContinent(Optional.ofNullable(dto.getContinenId())
-//                .map(continentRepository::getOne).orElse(null));
-//        tripHandling.setCountry(Optional.ofNullable(dto.getCountryId())
-//                .map(countryRepository::getOne).orElse(null));
-//        tripHandling.setAirport(Optional.ofNullable(dto.getAirportId())
-//                .map(airportRepository::getOne).orElse(null));
-//        tripHandling.setHotel(Optional.ofNullable(dto.getHotelId())
-//                .map(hotelRepository::getOne).orElse(null));
+        trip.setContinent(dto.getContinent());
+        trip.setCountry(dto.getCountry());
+        trip.setAirport(dto.getAirport());
+        trip.setHotel(dto.getHotel());
         trip.setTimeOfDeparture(dto.getTimeOfDeparture());
         trip.setTimeOfArrival(dto.getTimeOfArrival());
         trip.setNumberOfDays(dto.getNumberOfDays());
+        trip.setPictureUrl(dto.getPictureUrl());
+        trip.setPrice(dto.getPrice());
+        trip.setStockAmount(dto.getStockAmount());
         return trip;
     }
 
