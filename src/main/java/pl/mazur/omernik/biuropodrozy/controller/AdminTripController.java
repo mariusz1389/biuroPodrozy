@@ -23,26 +23,27 @@ public class AdminTripController {
     private TripService tripService;
 
     @PostMapping(value = "/trip/add")
-    public String addTrip(@RequestParam String tripDestionation,
+    public String addTrip(@RequestParam String tripDestination,
                              @RequestParam Integer stockAmount,
                              @RequestParam BigDecimal price,
-                             @RequestParam TripType productType,
+                             @RequestParam TripType tripType,
                              @RequestParam String continent,
                              @RequestParam String country,
                              @RequestParam String pictureUrl,
                              @RequestParam String airport,
                              @RequestParam String hotel,
-                             @RequestParam LocalDate timeOfDeparture,
-                             @RequestParam LocalDate timeOfArrival,
+                             @RequestParam String timeOfDeparture,
+                             @RequestParam String timeOfArrival,
                              @RequestParam int numbersOfDays) {
-        tripService.createNewTrip(tripDestionation, stockAmount, price, productType, continent,
-                country, pictureUrl, airport, hotel, timeOfDeparture, timeOfArrival, numbersOfDays);
-        return "redirect:/admin/trips"; // tworzy nowy request na url /trips
+        tripService.createNewTrip(tripDestination, stockAmount, price, tripType, continent,
+                country, pictureUrl, airport, hotel, LocalDate.parse(timeOfDeparture), LocalDate.parse(timeOfArrival), numbersOfDays);
+        return "redirect:/admin/trips";
     }
 
     @GetMapping(value = "/trip")
     public String addTrip(Model model) {
         model.addAttribute("tripTypes", TripType.values());
+
         return "addTrip";
     }
 
@@ -69,7 +70,7 @@ public class AdminTripController {
         model.addAttribute("tripList", tripService.findTripsToEdit(query, tripType));
         model.addAttribute("tripTypes", TripType.values());
         model.addAttribute("query", StringUtils.defaultIfBlank(query, ""));
-        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(e -> e.name().equals(tripType)).findFirst().orElse(null));
+        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(e-> e.name().equals(tripType)).distinct());
         return "adminTripList";
     }
 

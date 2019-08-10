@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dodaj wycieczke</title>
+    <title>Add trip</title>
     <th:block th:replace="fragments/header :: header-css"></th:block>
 
 </head>
@@ -10,16 +10,23 @@
 <div th:replace="fragments/header :: header"></div>
 
 <form th:action="@{/admin/trip/add}" method="post">
-    <input type="text" name="tripDestination" placeholder="Cel Podróży">
-    <input type="text" name="pictureURL" placeholder="Url obrazka">
-    <input type="number" name="stockAmount" placeholder="Stan magazynowy">
+    <input type="text" name="tripDestination" placeholder="Destination">
+    <input type="text" name="continent" placeholder="Continent">
+    <input type="text" name="country" placeholder="Country">
+    <input type="text" name="airport" placeholder="Airport">
+    <input type="text" name="hotel" placeholder="Hotel">
+    <input type="text" name="pictureUrl" placeholder="Piccture URL">
+    <input type="date" name="timeOfDeparture" placeholder="Starting Date">
+    <input type="date" name="timeOfArrival" placeholder="End Date">
+    <input type="number" name="numbersOfDays" placeholder="Number of Days">
+    <input type="number" name="stockAmount" placeholder="Stock amount">
     <input type="number" step="0.01" name="price" placeholder="Cena">
     <select name="tripType">
-        <option th:value="''" th:text="'Typ wycieczki'"></option>
+        <option th:value="''" th:text="'Trip Type'"></option>
         <option th:each="pt : ${tripTypes}" th:value="${pt}" th:text="${pt.type}"></option>
     </select>
 
-    <button>Dodaj produkt</button>
+    <button>Add new trip</button>
 
 </form>
 <div th:replace="fragments/footer :: footer"></div>

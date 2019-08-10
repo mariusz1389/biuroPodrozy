@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista produktów</title>
+    <title>Trip List</title>
     <th:block th:replace="fragments/header :: header-css"></th:block>
 
 </head>
@@ -12,11 +12,11 @@
 <form th:action="@{/admin/trips}">
     <input type="text" th:value="${query}" name="query">
     <select name="productType">
-        <option th:value="''" th:text="Wybierz"></option>
+        <option th:value="''" th:text="Choose"></option>
         <option th:selected="${tripType eq pt}" th:each="pt : ${tripTypes}" th:value="${pt}"
                 th:text="${pt.type}"></option>
     </select>
-    <button>szukaj</button>
+    <button>Search</button>
 
 </form>
 <table border="1px">
@@ -34,7 +34,7 @@
             <span th:text="${trip.tripDestination}"></span>
         </td>
         <td th:text="${trip.stockAmount}"></td>
-        <td th:text="${trip.tripType.getType()}"></td>
+        <td th:text="value = ${trip.tripType.getType()}"></td>
         <td th:text="${trip.price}"></td>
         <td><a th:text="Edytuj" th:href="@{/admin/trip/{id}(id=${trip.id})}"></a></td>
 

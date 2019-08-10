@@ -3,7 +3,6 @@ package pl.mazur.omernik.biuropodrozy.tripHandling;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +12,6 @@ public interface TripRepository<T extends Trip> extends JpaRepository<Trip, Long
     Optional<T> findProductById(Long id);
 
     List<T> findTripsByTripType(TripType tripType);
-
-
 
     @Query("select t from Trip t where upper(t.tripDestination) like concat('%',upper(?1),'%')")
     List<T> findTripsByTripDestinationLike(String searchText);

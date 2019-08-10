@@ -2,14 +2,9 @@ package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
-
-import java.util.Optional;
 
 @Service
 public class TripToTripDTOBuilder {
-
-
 
     @Autowired
     private TripRepository<Trip> tripRepository;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
+import pl.mazur.omernik.biuropodrozy.tripHandling.Trip;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

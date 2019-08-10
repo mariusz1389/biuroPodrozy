@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.mazur.omernik.biuropodrozy.UserContextService;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
+import pl.mazur.omernik.biuropodrozy.tripHandling.Trip;
 import pl.mazur.omernik.biuropodrozy.tripHandling.TripRepository;
 
 

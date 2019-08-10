@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
+import pl.mazur.omernik.biuropodrozy.tripHandling.Trip;
 import pl.mazur.omernik.biuropodrozy.tripHandling.TripDTO;
 import pl.mazur.omernik.biuropodrozy.tripHandling.TripService;
 

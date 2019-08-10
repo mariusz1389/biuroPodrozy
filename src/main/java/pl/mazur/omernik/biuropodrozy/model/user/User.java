@@ -22,9 +22,6 @@ public class User extends BaseEntity {
     private String username;
     private String passwordHash;
 
-    public String getUsername() {
-        return username;
-    }
 
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

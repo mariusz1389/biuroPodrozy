@@ -7,11 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.mazur.omernik.biuropodrozy.model.QTrip;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
 import pl.mazur.omernik.biuropodrozy.tripHandling.database.DataTablesOrder;
 import pl.mazur.omernik.biuropodrozy.tripHandling.database.DataTablesResponse;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,20 +22,19 @@ import java.util.stream.Collectors;
 public class TripService {
 
 
-
     @Autowired
     private TripRepository<Trip> tripRepository;
 
     @Autowired
     private TripToTripDTOBuilder tripToTripDTOBuilder;
 
-    public void createNewTrip(String tripDestination, Integer stockamount, BigDecimal price,
-                                 TripType tripType, String continent, String country,
-                                 String pictureURL, String airport,
-                                 String hotel, LocalDate timeOfDeparture, LocalDate timeOfArrival, int numberOfDays) {
+    public void createNewTrip(String tripDestination, Integer stockAmount, BigDecimal price,
+                              TripType tripType, String continent, String country,
+                              String pictureURL, String airport,
+                              String hotel, LocalDate timeOfDeparture, LocalDate timeOfArrival, int numberOfDays) {
         Trip trip = tripType == TripType.NORMAL ? new NonPromotionTrip() : new PromotionalTrip();
         trip.setTripDestination(tripDestination);
-        trip.setStockAmount(stockamount);
+        trip.setStockAmount(stockAmount);
         trip.setPrice(price);
         trip.setPictureUrl(pictureURL);
         trip.setContinent(continent);
@@ -50,8 +48,8 @@ public class TripService {
         tripRepository.save(trip);
     }
 
-    public void updateTrip(TripDTO productDTO) {
-        Trip s = tripToTripDTOBuilder.buildEntity(productDTO);
+    public void updateTrip(TripDTO tripDTO) {
+        Trip s = tripToTripDTOBuilder.buildEntity(tripDTO);
         tripRepository.save(s);
     }
 
@@ -59,10 +57,9 @@ public class TripService {
         return tripRepository.findProductById(id);
     }
 
-    public List<Trip> findTripsToEdit(String query, String productType) {
-        return findTrips(query, productType);
+    public List<Trip> findTripsToEdit(String query, String tripType) {
+        return findTrips(query, tripType);
     }
-
 
 
     public List<TripDTO> findTripsForCustomer(String query, String tripType) {
@@ -113,6 +110,40 @@ public class TripService {
         return StringUtils.isBlank(query) ? supplierForBlankQuery.apply(query) : supplierForNotBlankQuery.apply(query);
     }
 
+
+    private void mockTrip(String tripDestination, Integer stockamount, BigDecimal price,
+                          TripType tripType, String continent, String country,
+                          String pictureURL, String airport,
+                          String hotel, LocalDate timeOfDeparture, LocalDate timeOfArrival, int numberOfDays){
+
+        NonPromotionTrip nonPromotionTrip = new NonPromotionTrip();
+        nonPromotionTrip.setTripDestination(tripDestination);
+        nonPromotionTrip.setStockAmount(stockamount);
+        nonPromotionTrip.setPrice(price);
+        nonPromotionTrip.setTripType(tripType);
+        nonPromotionTrip.setContinent(continent);
+        nonPromotionTrip.setCountry(country);
+        nonPromotionTrip.setPictureUrl(pictureURL);
+        nonPromotionTrip.setAirport(airport);
+        nonPromotionTrip.setHotel(hotel);
+        nonPromotionTrip.setTimeOfDeparture(timeOfDeparture);
+        nonPromotionTrip.setTimeOfArrival(timeOfArrival);
+        nonPromotionTrip.setNumberOfDays(numberOfDays);
+        tripRepository.save(nonPromotionTrip);
+
+    }
+
+    @PostConstruct
+    public void addMockTrips() {
+        if (tripRepository.findAll().isEmpty()){
+            mockTrip("Mallorca", 10,BigDecimal.ONE, TripType.NORMAL, "Europe", "Spain","https://www.pexels.com/photo/cottages-in-the-middle-of-beach-753626/",
+                    "Mallorca Airport (PMI)", "Hilton", LocalDate.of(2019,06, 22), LocalDate.of(2019,06, 30),9  );
+            mockTrip("Lisboa", 10,BigDecimal.valueOf(2500), TripType.NORMAL, "Europe", "Portugal","https://www.pexels.com/photo/people-in-front-of-white-and-orange-church-2098705/",
+                    "Lisbon Airport (ZNZ)", "Hilton", LocalDate.of(2019,06, 22), LocalDate.of(2019,06, 30),9  );
+            mockTrip("Berlin", 10,BigDecimal.valueOf(1200), TripType.NORMAL, "Europe", "Germany","https://www.pexels.com/photo/white-greek-site-under-cloudy-sky-53146/",
+                    "Berlin Tegel (TXL)", "Hilton", LocalDate.of(2019,06, 22), LocalDate.of(2019,06, 30),9  );
+        }
+    }
 
 
 }
