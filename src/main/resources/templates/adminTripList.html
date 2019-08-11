@@ -34,7 +34,7 @@
             <span th:text="${trip.tripDestination}"></span>
         </td>
         <td th:text="${trip.stockAmount}"></td>
-        <td th:text="value = ${trip.tripType.getType()}"></td>
+        <td th:text="${trip.tripType.getType()}"></td>
         <td th:text="${trip.price}"></td>
         <td><a th:text="Edytuj" th:href="@{/admin/trip/{id}(id=${trip.id})}"></a></td>
 
