@@ -32,7 +32,8 @@ public class TripService {
                               TripType tripType, String continent, String country,
                               String pictureURL, String airport,
                               String hotel, LocalDate timeOfDeparture, LocalDate timeOfArrival, int numberOfDays) {
-        Trip trip = tripType == TripType.NORMAL ? new NonPromotionTrip() : new PromotionalTrip();
+        Trip trip = new Trip();
+        trip.setTripType(tripType);
         trip.setTripDestination(tripDestination);
         trip.setStockAmount(stockAmount);
         trip.setPrice(price);

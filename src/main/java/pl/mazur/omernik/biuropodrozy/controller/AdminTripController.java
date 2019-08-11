@@ -34,9 +34,9 @@ public class AdminTripController {
                              @RequestParam String hotel,
                              @RequestParam String timeOfDeparture,
                              @RequestParam String timeOfArrival,
-                             @RequestParam int numbersOfDays) {
+                             @RequestParam int numberOfDays) {
         tripService.createNewTrip(tripDestination, stockAmount, price, tripType, continent,
-                country, pictureUrl, airport, hotel, LocalDate.parse(timeOfDeparture), LocalDate.parse(timeOfArrival), numbersOfDays);
+                country, pictureUrl, airport, hotel, LocalDate.parse(timeOfDeparture), LocalDate.parse(timeOfArrival), numberOfDays);
         return "redirect:/admin/trips";
     }
 
@@ -70,7 +70,7 @@ public class AdminTripController {
         model.addAttribute("tripList", tripService.findTripsToEdit(query, tripType));
         model.addAttribute("tripTypes", TripType.values());
         model.addAttribute("query", StringUtils.defaultIfBlank(query, ""));
-        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(e-> e.name().equals(tripType)).distinct());
+        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(t-> t.name().equals(tripType)).findFirst().orElse(null));
         return "adminTripList";
     }
 

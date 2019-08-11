@@ -11,7 +11,7 @@
 
 <form th:action="@{/admin/trips}">
     <input type="text" th:value="${query}" name="query">
-    <select name="productType">
+    <select name="tripType">
         <option th:value="''" th:text="Choose"></option>
         <option th:selected="${tripType eq pt}" th:each="pt : ${tripTypes}" th:value="${pt}"
                 th:text="${pt.type}"></option>
@@ -22,11 +22,11 @@
 <table border="1px">
     <tr>
         <th>Id</th>
-        <th>Cel podróży</th>
-        <th>Ilość miejsc</th>
-        <th>Typ wycieczki</th>
-        <th>Cena</th>
-        <th>Akcje</th>
+        <th>Trip Destination</th>
+        <th>Stock Amount</th>
+        <th>Trip type</th>
+        <th>Price</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="trip : ${tripList}">
         <td th:text="${trip.id}"></td>
