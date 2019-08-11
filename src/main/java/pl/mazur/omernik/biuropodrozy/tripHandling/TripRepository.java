@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TripRepository<T extends Trip> extends JpaRepository<Trip, Long>, QuerydslPredicateExecutor<Trip> {
 
-    Optional<T> findProductById(Long id);
+    Optional<T> findTripById(Long id);
 
     List<T> findTripsByTripType(TripType tripType);
 

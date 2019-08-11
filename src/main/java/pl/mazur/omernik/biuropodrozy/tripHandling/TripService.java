@@ -55,7 +55,7 @@ public class TripService {
     }
 
     public Optional<Trip> findTrips(Long id) {
-        return tripRepository.findProductById(id);
+        return tripRepository.findTripById(id);
     }
 
     public List<Trip> findTripsToEdit(String query, String tripType) {
@@ -88,15 +88,15 @@ public class TripService {
         return tripRepository.findById(id).map(tripToTripDTOBuilder::buildDto);
     }
 
-    public DataTablesResponse<TripDTO> getProductDataTable(Integer start, Integer length, String sortColumn, String sortOrder, String searchText) {
+    public DataTablesResponse<TripDTO> getTripDataTable(Integer start, Integer length, String sortColumn, String sortOrder, String searchText) {
         DataTablesResponse<TripDTO> dtResponse = new DataTablesResponse<>();
-        Page<Trip> booksByName = findTripByDestination(searchText, start == 0 ? 0 : (start / length), length, getSort(sortColumn, sortOrder));
-        dtResponse.setData(booksByName.getContent()
+        Page<Trip> tripByDestination = findTripByDestination(searchText, start == 0 ? 0 : (start / length), length, getSort(sortColumn, sortOrder));
+        dtResponse.setData(tripByDestination.getContent()
                 .stream()
                 .map(tripToTripDTOBuilder::buildDto)
                 .collect(Collectors.toList()));
-        dtResponse.setRecordsTotal((int) booksByName.getTotalElements());
-        dtResponse.setRecordsFiltered((int) booksByName.getTotalElements());
+        dtResponse.setRecordsTotal((int) tripByDestination.getTotalElements());
+        dtResponse.setRecordsFiltered((int) tripByDestination.getTotalElements());
         return dtResponse;
     }
 

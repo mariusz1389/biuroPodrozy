@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Getter
 @Entity
 @ToString
-@Table(name = "oreder_lines")
+@Table(name = "order_lines")
 public class OrderLine extends BaseEntity implements Serializable {
 
     @OneToOne
