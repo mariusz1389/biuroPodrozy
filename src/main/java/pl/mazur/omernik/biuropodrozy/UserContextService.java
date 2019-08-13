@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import pl.mazur.omernik.biuropodrozy.orders.OrderLine;
 import pl.mazur.omernik.biuropodrozy.cart.Cart;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
+import pl.mazur.omernik.biuropodrozy.tripHandling.Trip;
 import pl.mazur.omernik.biuropodrozy.model.user.roles.RoleTypeEnum;
 
 

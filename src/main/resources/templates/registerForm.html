@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>REJESTRACJA</title>
+    <title>Registration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <th:block th:replace="fragments/header :: header-css"/>
     <link rel="stylesheet" th:href="@{/css/signin.css}"/>
@@ -12,36 +12,36 @@
 
     <p class="error" th:text="${userExistsException}"></p>
 
-    <label for="name">Imię:</label>
+    <label for="name">Name:</label>
     <input id="name" type="text" th:field="*{firstName}" autofocus class="form-control"/>
     <div class="error" th:errors="*{firstName}"></div>
 
-    <label for="surname">Nazwisko:</label>
+    <label for="surname">Surname:</label>
     <input id="surname" type="text" th:field="*{lastName}" autofocus class="form-control"/>
     <div class="error" th:errors="*{lastName}"></div>
 
-    <label for="zipcode">Kod pocztowy:</label>
+    <label for="zipcode">Postal Code:</label>
     <input id="zipcode" type="text" th:field="*{zipCode}" autofocus class="form-control"/>
     <div class="error" th:errors="*{zipCode}"></div>
 
-    <label for="city">Miasto:</label>
+    <label for="city">Town:</label>
     <input id="city" type="text" th:field="*{city}" autofocus class="form-control"/>
     <div class="error" th:errors="*{city}"></div>
 
-    <label for="street">Ulica:</label>
+    <label for="street">Street:</label>
     <input id="street" type="text" th:field="*{street}" autofocus class="form-control"/>
     <div class="error" th:errors="*{street}"></div>
 
-    <label for="username">Nazwa użytkownika:</label>
-    <input id="username" type="text" th:field="*{getEmail}" autofocus class="form-control"/>
-    <div class="error" th:errors="*{getEmail}"></div>
+    <label for="username">E-Mail address:</label>
+    <input id="username" type="text" th:field="*{email}" autofocus class="form-control"/>
+    <div class="error" th:errors="*{email}"></div>
 
-    <label for="passw">Hasło:</label>
+    <label for="passw">Password:</label>
     <input id="passw" type="password" th:field="*{password}" autofocus class="form-control"/>
     <div class="error" th:errors="*{password}"></div>
 
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Utwórz konto</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
 
     <div th:replace="fragments/footer :: footer"></div>
 </form>

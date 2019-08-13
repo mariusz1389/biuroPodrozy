@@ -15,6 +15,6 @@ public class OrderController {
     @RequestMapping(value = "/placeOrder")
     public String makeAnOrder(Model model){
         model.addAttribute("order", orderService.placeOrder());
-        return  "orderFinisched";
+        return  "orderFinished";
     }
 }

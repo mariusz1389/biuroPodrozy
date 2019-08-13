@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
-import pl.mazur.omernik.biuropodrozy.model.Trip;
+import pl.mazur.omernik.biuropodrozy.tripHandling.Trip;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Getter
 @Entity
 @ToString
-@Table(name = "oreder_lines")
+@Table(name = "order_lines")
 public class OrderLine extends BaseEntity implements Serializable {
 
     @OneToOne

@@ -39,7 +39,7 @@ public class TripController {
     @RequestMapping(value = "/tableData", method = RequestMethod.GET)
     @ResponseBody
     public DataTablesResponse<TripDTO> find(@RequestParam(required = false) Integer start, @RequestParam(required = false) Integer length, @RequestParam(required = false) String sortColumn, @RequestParam(required = false) String sortOrder, @RequestParam(required = false) String searchText) {
-        return tripService.getProductDataTable(defaultIfNull(start, 0), defaultIfNull(length, 5), StringUtils.defaultIfBlank(sortColumn, "id"), StringUtils.defaultIfBlank(sortOrder, "asc"), StringUtils.defaultIfBlank(searchText, ""));
+        return tripService.getTripDataTable(defaultIfNull(start, 0), defaultIfNull(length, 5), StringUtils.defaultIfBlank(sortColumn, "id"), StringUtils.defaultIfBlank(sortOrder, "asc"), StringUtils.defaultIfBlank(searchText, ""));
 
     }
 }

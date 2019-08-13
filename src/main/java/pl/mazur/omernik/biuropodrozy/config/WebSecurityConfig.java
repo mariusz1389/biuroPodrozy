@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.mazur.omernik.biuropodrozy.model.user.LoginUserDetailService;
 
 import javax.sql.DataSource;
 
@@ -19,8 +18,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
     private final PasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private LoginUserDetailService userService;
 
     @Autowired
     public WebSecurityConfig(DataSource dataSource, PasswordEncoder bCryptPasswordEncoder) {
@@ -42,18 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable().and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("emailaddress")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login-process")
                 .failureUrl("/login?error")
-                .defaultSuccessUrl("/").and()
+                .defaultSuccessUrl("/trip/list").and()
                 .logout().logoutSuccessUrl("/login");
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

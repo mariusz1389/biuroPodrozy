@@ -30,10 +30,9 @@
     <div id="products" th:each="prod : ${trip}"  class="list-group">
         <div class="item col-xs-4 col-lg-4">
             <div class="thumbnail">
-                <img class="group list-group-image" style="max-height: 150px" th:src="${prod.tripURL}" alt="" />
+                <img class="group list-group-image" style="max-height: 150px" th:src="${prod.pictureUrl}" alt="" />
                 <div class="caption">
-                    <h4 th:text="${prod.destination}" class="group inner list-group-item-heading"></h4>
-                    <p th:text="${prod.description}" class="group inner list-group-item-text"></p>
+                    <h4 th:text="${prod.tripDestination}" class="group inner list-group-item-heading"></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p th:text="${prod.price}" class="lead"></p>

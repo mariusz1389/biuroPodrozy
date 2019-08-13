@@ -37,29 +37,28 @@ public class MainController {
 
 
     @GetMapping(value = "/register")
-    public ModelAndView registerForm(Model model) {
+    public String registerForm(Model model) {
         model.addAttribute("customerFormData", new CustomerRegistrationDto());
-        ModelAndView modelAndView = new ModelAndView("registerForm");
-        return modelAndView;
+
+        return "registerForm";
     }
 
     @PostMapping(value = "/register")
-    public ModelAndView registerEffect(@ModelAttribute(name = "customerFormData")
+    public String registerEffect(@ModelAttribute(name = "customerFormData")
                                  @Valid CustomerRegistrationDto customerFormData,
                                  BindingResult bindingResult,
                                  Model model) {
-        ModelAndView modelAndView = new ModelAndView("registerForm");
         if (bindingResult.hasErrors()) {
-            return modelAndView;
+            return "registerForm";
         }
         try {
             userRegistrationService.registerUser(customerFormData);
         } catch (UserExistsException e) {
             model.addAttribute("userExistsException", e.getMessage());
-            return modelAndView;
+            return "registerForm";
         }
         model.addAttribute("registrationData", customerFormData);
-        return new ModelAndView("registerEffect");
+        return "registerEffect";
     }
 
 

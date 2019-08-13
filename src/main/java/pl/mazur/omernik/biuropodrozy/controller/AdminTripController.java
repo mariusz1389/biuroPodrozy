@@ -23,26 +23,27 @@ public class AdminTripController {
     private TripService tripService;
 
     @PostMapping(value = "/trip/add")
-    public String addProduct(@RequestParam String tripDestionation,
+    public String addTrip(@RequestParam String tripDestination,
                              @RequestParam Integer stockAmount,
                              @RequestParam BigDecimal price,
-                             @RequestParam TripType productType,
+                             @RequestParam TripType tripType,
                              @RequestParam String continent,
                              @RequestParam String country,
                              @RequestParam String pictureUrl,
                              @RequestParam String airport,
                              @RequestParam String hotel,
-                             @RequestParam LocalDate timeOfDeparture,
-                             @RequestParam LocalDate timeOfArrival,
-                             @RequestParam int numbersOfDays) {
-        tripService.createNewTrip(tripDestionation, stockAmount, price, productType, continent,
-                country, pictureUrl, airport, hotel, timeOfDeparture, timeOfArrival, numbersOfDays);
-        return "redirect:/admin/trips"; // tworzy nowy request na url /trips
+                             @RequestParam String timeOfDeparture,
+                             @RequestParam String timeOfArrival,
+                             @RequestParam int numberOfDays) {
+        tripService.createNewTrip(tripDestination, stockAmount, price, tripType, continent,
+                country, pictureUrl, airport, hotel, LocalDate.parse(timeOfDeparture), LocalDate.parse(timeOfArrival), numberOfDays);
+        return "redirect:/admin/trips";
     }
 
     @GetMapping(value = "/trip")
-    public String addProduct(Model model) {
+    public String addTrip(Model model) {
         model.addAttribute("tripTypes", TripType.values());
+
         return "addTrip";
     }
 
@@ -65,11 +66,11 @@ public class AdminTripController {
 
 
     @GetMapping(value = "/trips")
-    public String showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType, Model model) {
+    public String showTrips(@RequestParam(required = false) String query, @RequestParam(required = false) String tripType, Model model) {
         model.addAttribute("tripList", tripService.findTripsToEdit(query, tripType));
         model.addAttribute("tripTypes", TripType.values());
         model.addAttribute("query", StringUtils.defaultIfBlank(query, ""));
-        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(e -> e.name().equals(tripType)).findFirst().orElse(null));
+        model.addAttribute("tripType", Arrays.stream(TripType.values()).filter(t-> t.name().equals(tripType)).findFirst().orElse(null));
         return "adminTripList";
     }
 

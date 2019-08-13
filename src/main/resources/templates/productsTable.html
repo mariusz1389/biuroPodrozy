@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Produkty</title>
+    <title>Trips</title>
     <th:block th:replace="fragments/header :: header-css"></th:block>
 </head>
 
@@ -15,11 +15,11 @@
         <thead>
         <tr>
             <th class="trip_id">Id</th>
-            <th>Cel podrózy</th>
-            <th>Cena</th>
-            <th>Ilość</th>
-            <th>Typ</th>
-            <th>Akcja</th>
+            <th>Destination</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Action</th>
         </tr>
         </thead>
     </table>
@@ -32,7 +32,7 @@
     var myTable = $('#table').DataTable({
         serverSide: true,
         ajax: {
-            url: '/products/tableData',
+            url: '/trips/tableData',
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             data: function (d) {
@@ -69,8 +69,8 @@
                 data: 'id'
             }
             , {
-                name: 'destination',
-                data: 'destination'
+                name: 'tripDestination',
+                data: 'tripDestination'
             }
             ,
             {
@@ -88,7 +88,7 @@
             {
                 name: 'action',
                 data: null,
-                defaultContent: "<button>Dodaj do koszyka</button>"
+                defaultContent: "<button>Add to bascet</button>"
             }
         ],
         processing: true,

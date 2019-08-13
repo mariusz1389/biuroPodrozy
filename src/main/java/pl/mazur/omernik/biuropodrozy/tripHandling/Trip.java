@@ -1,4 +1,4 @@
-package pl.mazur.omernik.biuropodrozy.model;
+package pl.mazur.omernik.biuropodrozy.tripHandling;
 
 import lombok.*;
 import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
