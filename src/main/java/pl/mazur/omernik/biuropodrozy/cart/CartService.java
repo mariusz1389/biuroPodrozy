@@ -13,17 +13,8 @@ public class CartService {
                 .map(e -> e.getTripPrice()
                         .multiply(BigDecimal.valueOf(e.getQuantity()))).reduce((a, b) -> a.add(b))
                 .orElse(BigDecimal.ZERO);
-        return tripPrice.add(calculateDelivery(tripPrice));
+        return tripPrice;
     }
 
-    public BigDecimal calculateDelivery(BigDecimal tripPrice) {
-        if (tripPrice.compareTo(BigDecimal.valueOf(200.0)) > 0) {
-            return BigDecimal.ZERO;
-        }
-        if (tripPrice.compareTo(BigDecimal.valueOf(100.0)) > 0) {
-            return BigDecimal.ONE;
-        }
-        return BigDecimal.TEN;
-    }
 
 }
