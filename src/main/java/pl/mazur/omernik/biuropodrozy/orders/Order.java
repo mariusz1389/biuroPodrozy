@@ -2,10 +2,8 @@ package pl.mazur.omernik.biuropodrozy.orders;
 
 
 import lombok.*;
-
-import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
 import pl.mazur.omernik.biuropodrozy.LocalDateTimeConverter;
-import pl.mazur.omernik.biuropodrozy.model.user.Customer;
+import pl.mazur.omernik.biuropodrozy.entity.BaseEntity;
 import pl.mazur.omernik.biuropodrozy.model.user.User;
 import pl.mazur.omernik.biuropodrozy.model.user.UserAddress;
 
@@ -55,7 +53,7 @@ public class Order extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    public Order(String username, BigDecimal totalCost, UserAddress userAddress, UserAddress userAddress1, LocalDateTime now, List<OrderLine> orderLines, Customer customer, OrderStatus aNew) {
 
-    }
+
+
 }
