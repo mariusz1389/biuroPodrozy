@@ -29,14 +29,14 @@
 <div th:replace="fragments/footer :: footer"></div>
 <script th:inline="javascript" type="text/javascript">
     var firstRequest = [[${firstTime}]];
-    var myTable = $('#table').tableData({
+    var myTable = $('#table').DataTable({
         serverSide: true,
         ajax: {
-            url: '/trips/tableData',
+            url: '/trip/tableData',
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             data: function (d) {
-                function handleRequestParams() { 
+                function handleRequestParams() {
                     var url = new URL(window.location.href);
                     var startFromUrl = url.searchParams.get("start");
                     var start = firstRequest ? startFromUrl ? startFromUrl : 0 : d.start;

@@ -32,7 +32,7 @@ public class TripController {
     public String productsTable(Model model) {
         model.addAttribute("firstTime", true);
         model.addAttribute("cartActive", true);
-        return "productsTable";
+        return "tripsTable";
     }
 
 
